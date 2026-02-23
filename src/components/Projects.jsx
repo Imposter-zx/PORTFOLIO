@@ -28,12 +28,12 @@ const Projects = () => {
       <div className="flex justify-between items-end mb-16">
         <div>
           <h2 className="text-4xl font-bold mb-2">My <span className="neon-text-purple">Projects</span></h2>
-          <p className="text-[#a0a0a0]">Featured work and experiments from my GitHub.</p>
+          <p className="text-[var(--text-dim)]">Featured work and experiments from my GitHub.</p>
         </div>
         <a 
           href="https://github.com/Imposter-zx" 
           target="_blank"
-          className="hidden md:flex items-center space-x-2 text-sm font-medium text-[#a0a0a0] hover:text-[#00f2ff] transition-all"
+          className="hidden md:flex items-center space-x-2 text-sm font-medium text-[var(--text-dim)] hover:text-[var(--neon-blue)] transition-all"
         >
           <span>View all repos</span>
           <ExternalLink className="w-4 h-4" />

@@ -12,7 +12,7 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <span className="px-4 py-1 rounded-full border border-[#00f2ff]/30 bg-[#00f2ff]/5 text-[#00f2ff] text-xs font-mono mb-6 inline-block uppercase tracking-wider">
+          <span className="px-4 py-1 rounded-full border border-[var(--neon-blue)]/30 bg-[var(--neon-blue)]/5 text-[var(--neon-blue)] text-xs font-mono mb-6 inline-block uppercase tracking-wider">
             Available for Internships
           </span>
           <h1 className="text-6xl md:text-8xl font-black mb-6 leading-tight">
@@ -25,7 +25,7 @@ const Hero = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
-            className="text-xl md:text-2xl text-[#a0a0a0] mb-12 h-8 font-light"
+            className="text-xl md:text-2xl text-[var(--text-dim)] mb-12 h-8 font-light"
         >
             <Typewriter
                 words={[

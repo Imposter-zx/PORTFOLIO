@@ -33,7 +33,7 @@ const Skills = () => {
     <section id="skills" className="py-24 px-6">
       <div className="text-center mb-16">
         <h2 className="text-4xl font-bold mb-4">Core <span className="neon-text-blue">Tech Stack</span></h2>
-        <p className="text-[#a0a0a0] max-w-xl mx-auto">
+        <p className="text-[var(--text-dim)] max-w-xl mx-auto">
           A collection of tools and technologies I use to bring ideas to digital life.
         </p>
       </div>
@@ -49,14 +49,14 @@ const Skills = () => {
             className={`glass p-6 rounded-2xl border ${cat.borderColor} bg-gradient-to-br ${cat.color} hover:scale-[1.02] transition-all`}
           >
             <h3 className="text-xl font-bold mb-6 flex items-center">
-                <div className="w-2 h-2 rounded-full bg-white mr-3 shadow-[0_0_10px_white]"></div>
+                <div className="w-2 h-2 rounded-full bg-[var(--text-main)] mr-3 shadow-[0_0_10px_var(--text-main)]"></div>
                 {cat.title}
             </h3>
             <div className="flex flex-wrap gap-2">
               {cat.skills.map((skill, j) => (
                 <span 
                   key={j}
-                  className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium text-white/80 hover:bg-white/10 transition-colors"
+                  className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium text-[var(--text-main)]/80 hover:bg-white/10 transition-colors"
                 >
                   {skill}
                 </span>
@@ -71,11 +71,11 @@ const Skills = () => {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        className="mt-20 glass p-8 rounded-3xl border-dashed border-white/20 flex flex-col md:flex-row items-center justify-between gap-8"
+        className="mt-20 glass p-8 rounded-3xl border-dashed border-[var(--glass-border)] flex flex-col md:flex-row items-center justify-between gap-8"
       >
         <div className="flex-1">
-            <h3 className="text-2xl font-bold mb-2">Learning <span className="text-[#7000ff]">Journey</span></h3>
-            <p className="text-[#a0a0a0]">
+            <h3 className="text-2xl font-bold mb-2">Learning <span className="text-[var(--neon-purple)]">Journey</span></h3>
+            <p className="text-[var(--text-dim)]">
                 Currently a student at IFIAG, I maintain a constant flow of learning through documentation, 
                 open-source contributions, and personal projects. My focus is on mastering 
                 full-stack development and creative motion design.

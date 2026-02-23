@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Github, Menu, X, Terminal } from 'lucide-react';
+import { Github, Menu, X, Terminal, Sun, Moon } from 'lucide-react';
 
-const Navbar = () => {
+const Navbar = ({ isDark, toggleTheme }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -48,19 +48,31 @@ const Navbar = () => {
               {link.name}
             </motion.a>
           ))}
+          <motion.button
+            onClick={toggleTheme}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="w-10 h-10 glass flex items-center justify-center rounded-full hover:border-[var(--neon-blue)] transition-all mr-2"
+          >
+            {isDark ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-indigo-600" />}
+          </motion.button>
+          
           <motion.a
             href="https://github.com/Imposter-zx"
             target="_blank"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="w-10 h-10 glass flex items-center justify-center rounded-full hover:border-[#00f2ff] transition-all"
+            className="w-10 h-10 glass flex items-center justify-center rounded-full hover:border-[var(--neon-blue)] transition-all"
           >
             <Github className="w-5 h-5" />
           </motion.a>
         </div>
 
-        {/* Mobile Toggle */}
-        <div className="md:hidden">
+        {/* Mobile Toggle & Theme */}
+        <div className="md:hidden flex items-center space-x-4">
+          <button onClick={toggleTheme} className="p-2">
+            {isDark ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-indigo-600" />}
+          </button>
           <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
             {isMobileMenuOpen ? <X /> : <Menu />}
           </button>

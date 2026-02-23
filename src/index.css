@@ -8,6 +8,18 @@
   --text-main: #e0e0e0;
   --text-dim: #a0a0a0;
   --glass-border: rgba(255, 255, 255, 0.1);
+  --selection: rgba(0, 242, 255, 0.3);
+}
+
+.light {
+  --bg-dark: #f8fafc;
+  --bg-card: rgba(255, 255, 255, 0.7);
+  --neon-blue: #0088ff;
+  --neon-purple: #6a00ff;
+  --text-main: #1a1a1a;
+  --text-dim: #4a4a4a;
+  --glass-border: rgba(0, 0, 0, 0.1);
+  --selection: rgba(0, 136, 255, 0.2);
 }
 
 * {
@@ -39,7 +51,11 @@ h6 {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--glass-border);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+}
+
+.light .glass {
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
 }
 
 .glass-hover:hover {

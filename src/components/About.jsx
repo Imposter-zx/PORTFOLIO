@@ -39,9 +39,9 @@ const About = () => {
                 Turning Ideas into <br />
                 <span className="neon-text-blue">Functional Art.</span>
               </h2>
-              <div className="space-y-6 text-[#a0a0a0] text-lg leading-relaxed">
+              <div className="space-y-6 text-[var(--text-dim)] text-lg leading-relaxed">
                 <p>
-                  As a Computer Science student at <span className="text-[#00f2ff]">IFIAG</span>, I specialize in bridging 
+                  As a Computer Science student at <span className="text-[var(--neon-blue)]">IFIAG</span>, I specialize in bridging 
                   the gap between logical backend structures and visually stunning frontend experiences. 
                 </p>
                 <p>
@@ -49,7 +49,7 @@ const About = () => {
                   with creative problem-solving. Whether it's crafting 3D assets in Blender or optimizing a React 
                   application, I aim for excellence in every pixel.
                 </p>
-                <p className="border-l-2 border-[#00f2ff] pl-6 font-medium text-white italic">
+                <p className="border-l-2 border-[var(--neon-blue)] pl-6 font-medium text-[var(--text-main)] italic">
                   Currently seeking a 1-3 month internship to contribute my skills to a dynamic team.
                 </p>
               </div>

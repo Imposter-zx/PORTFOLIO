@@ -13,38 +13,38 @@ const Contact = () => {
                 viewport={{ once: true }}
             >
                 <h2 className="text-4xl md:text-5xl font-bold mb-6">Let's <span className="neon-text-blue">Connect.</span></h2>
-                <p className="text-[#a0a0a0] text-lg mb-12">
+                <p className="text-[var(--text-dim)] text-lg mb-12">
                     I'm currently looking for an internship and am open to discussing new opportunities or creative collaborations. 
                     Feel free to reach out!
                 </p>
 
                 <div className="space-y-6">
-                    <div className="flex items-center space-x-4 group p-4 glass rounded-2xl hover:border-[#00f2ff]/50 transition-all cursor-pointer">
-                        <div className="w-12 h-12 bg-[#00f2ff]/10 rounded-xl flex items-center justify-center text-[#00f2ff]">
+                    <div className="flex items-center space-x-4 group p-4 glass rounded-2xl hover:border-[var(--neon-blue)]/50 transition-all cursor-pointer">
+                        <div className="w-12 h-12 bg-[var(--neon-blue)]/10 rounded-xl flex items-center justify-center text-[var(--neon-blue)]">
                             <Mail className="w-6 h-6" />
                         </div>
                         <div>
-                            <div className="text-xs uppercase tracking-widest text-[#666]">Email</div>
+                            <div className="text-xs uppercase tracking-widest text-[var(--text-dim)]">Email</div>
                             <div className="font-medium">contact@ilyas.design</div>
                         </div>
                     </div>
 
-                    <div className="flex items-center space-x-4 p-4 glass rounded-2xl border-white/5">
-                        <div className="w-12 h-12 bg-[#7000ff]/10 rounded-xl flex items-center justify-center text-[#7000ff]">
+                    <div className="flex items-center space-x-4 p-4 glass rounded-2xl border-[var(--glass-border)]">
+                        <div className="w-12 h-12 bg-[var(--neon-purple)]/10 rounded-xl flex items-center justify-center text-[var(--neon-purple)]">
                             <MessageSquare className="w-6 h-6" />
                         </div>
                         <div>
-                            <div className="text-xs uppercase tracking-widest text-[#666]">Availability</div>
+                            <div className="text-xs uppercase tracking-widest text-[var(--text-dim)]">Availability</div>
                             <div className="font-medium text-[#00ff9d]">Open for Internships 2026</div>
                         </div>
                     </div>
                 </div>
 
                 <div className="mt-12 flex space-x-6">
-                    <a href="https://github.com/Imposter-zx" target="_blank" className="w-14 h-14 glass rounded-full flex items-center justify-center hover:bg-[#00f2ff]/10 hover:border-[#00f2ff] transition-all">
+                    <a href="https://github.com/Imposter-zx" target="_blank" className="w-14 h-14 glass rounded-full flex items-center justify-center hover:bg-[var(--neon-blue)]/10 hover:border-[var(--neon-blue)] transition-all">
                         <Github className="w-6 h-6" />
                     </a>
-                    <a href="#" className="w-14 h-14 glass rounded-full flex items-center justify-center hover:bg-[#7000ff]/10 hover:border-[#7000ff] transition-all">
+                    <a href="#" className="w-14 h-14 glass rounded-full flex items-center justify-center hover:bg-[var(--neon-purple)]/10 hover:border-[var(--neon-purple)] transition-all">
                         <Linkedin className="w-6 h-6" />
                     </a>
                 </div>

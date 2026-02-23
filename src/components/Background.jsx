@@ -2,19 +2,21 @@ import React, { useCallback } from "react";
 import { loadSlim } from "@tsparticles/slim";
 import Particles from "@tsparticles/react";
 
-const Background = () => {
+const Background = ({ isDark }) => {
   const particlesInit = useCallback(async (engine) => {
     await loadSlim(engine);
   }, []);
 
+  const themeColor = isDark ? "#00f2ff" : "#0088ff";
+
   return (
-    <div className="fixed inset-0 -z-10 bg-[#050505]">
+    <div className="fixed inset-0 -z-10 bg-[var(--bg-dark)]">
       {/* Subtle Grid Overlay */}
       <div 
         className="absolute inset-0"
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 242, 255, 0.03) 1px, transparent 1px), 
-                          linear-gradient(90deg, rgba(0, 242, 255, 0.03) 1px, transparent 1px)`,
+          backgroundImage: `linear-gradient(${isDark ? 'rgba(0, 242, 255, 0.03)' : 'rgba(0, 136, 255, 0.05)'} 1px, transparent 1px), 
+                          linear-gradient(90deg, ${isDark ? 'rgba(0, 242, 255, 0.03)' : 'rgba(0, 136, 255, 0.05)'} 1px, transparent 1px)`,
           backgroundSize: '40px 40px'
         }}
       ></div>
@@ -36,12 +38,12 @@ const Background = () => {
             },
           },
           particles: {
-            color: { value: "#00f2ff" },
+            color: { value: themeColor },
             links: {
-              color: "#00f2ff",
+              color: themeColor,
               distance: 150,
               enable: true,
-              opacity: 0.1,
+              opacity: isDark ? 0.1 : 0.2,
               width: 1,
             },
             move: {
@@ -62,8 +64,8 @@ const Background = () => {
       />
       
       {/* Soft Glows */}
-      <div className="absolute top-0 -left-1/4 w-1/2 h-1/2 bg-blue-500/10 blur-[120px] rounded-full"></div>
-      <div className="absolute bottom-0 -right-1/4 w-1/2 h-1/2 bg-purple-500/10 blur-[120px] rounded-full"></div>
+      <div className={`absolute top-0 -left-1/4 w-1/2 h-1/2 ${isDark ? 'bg-blue-500/10' : 'bg-blue-400/5'} blur-[120px] rounded-full`}></div>
+      <div className={`absolute bottom-0 -right-1/4 w-1/2 h-1/2 ${isDark ? 'bg-purple-500/10' : 'bg-purple-400/5'} blur-[120px] rounded-full`}></div>
     </div>
   );
 };

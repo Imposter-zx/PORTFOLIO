@@ -8,54 +8,42 @@ const Hero = () => {
     <section id="home" className="min-h-screen flex flex-col justify-center pt-20 px-6">
       <div className="max-w-4xl">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          <span className="px-4 py-1 rounded-full border border-[var(--neon-blue)]/30 bg-[var(--neon-blue)]/5 text-[var(--neon-blue)] text-xs font-mono mb-6 inline-block uppercase tracking-wider">
-            Available for Internships
+          <span className="text-[var(--accent)] text-xs font-mono mb-8 inline-block uppercase tracking-[0.3em]">
+            Available for Internships 2026
           </span>
-          <h1 className="text-6xl md:text-8xl font-black mb-6 leading-tight">
-            Developer & <br />
-            <span className="neon-text-blue">Creative</span> <span className="neon-text-purple italic">Designer</span>
+          <h1 className="text-6xl md:text-9xl font-black mb-10 leading-[0.9] tracking-tighter">
+            Digital<br />
+            <span className="text-[var(--accent)]">Execution.</span><br />
+            <span className="text-[var(--text-dim)] font-light">Human Intent.</span>
           </h1>
         </motion.div>
 
         <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-            className="text-xl md:text-2xl text-[var(--text-dim)] mb-12 h-8 font-light"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.8 }}
+            className="max-w-xl text-lg md:text-xl text-[var(--text-dim)] mb-12 font-light leading-relaxed"
         >
-            <Typewriter
-                words={[
-                    'Computer Science Student at IFIAG',
-                    'Building modern digital experiences',
-                    'UI/UX & Creative Identity',
-                    'Solving problems through code'
-                ]}
-                loop={true}
-                cursor
-                cursorStyle='_'
-                typeSpeed={70}
-                deleteSpeed={50}
-                delaySpeed={2000}
-            />
+            Ilyas Ait Oulhiane — A Creative Developer based in Morocco, 
+            bridging the gap between rigid logic and expressive digital experiences.
         </motion.div>
 
         <motion.div
            initial={{ opacity: 0, y: 20 }}
            animate={{ opacity: 1, y: 0 }}
            transition={{ delay: 0.6 }}
-           className="flex flex-wrap gap-6"
+           className="flex flex-wrap gap-8 items-center"
         >
-            <button className="neon-btn-blue flex items-center group">
-                View My Projects
-                <ChevronRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            <button className="neon-btn-blue group">
+                Selected Work
             </button>
-            <button className="px-8 py-3 rounded-lg glass border border-white/10 text-white font-semibold flex items-center hover:bg-white/5 transition-all">
-                Download CV
-                <Download className="ml-2 w-4 h-4" />
+            <button className="text-sm uppercase tracking-widest font-bold text-[var(--text-dim)] hover:text-[var(--text-main)] transition-colors flex items-center group">
+                Contact Me
+                <ChevronRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
         </motion.div>
       </div>

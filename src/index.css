@@ -4,25 +4,26 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap");
 
 :root {
-  --bg-dark: #050505;
-  --bg-card: rgba(15, 15, 15, 0.7);
+  --bg-dark: #070707;
+  --bg-card: rgba(18, 18, 18, 0.4);
   --neon-blue: #00f2ff;
-  --neon-purple: #7000ff;
-  --text-main: #e0e0e0;
-  --text-dim: #a0a0a0;
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --selection: rgba(0, 242, 255, 0.3);
+  --accent: var(--neon-blue);
+  --text-main: #f5f5f5;
+  --text-dim: #888888;
+  --glass-border: rgba(255, 255, 255, 0.05);
+  --selection: rgba(0, 242, 255, 0.2);
+  --edge-spacing: clamp(1.5rem, 5vw, 4rem);
 }
 
 .light {
-  --bg-dark: #f8fafc;
-  --bg-card: rgba(255, 255, 255, 0.7);
-  --neon-blue: #0088ff;
-  --neon-purple: #6a00ff;
-  --text-main: #1a1a1a;
-  --text-dim: #4a4a4a;
-  --glass-border: rgba(0, 0, 0, 0.1);
-  --selection: rgba(0, 136, 255, 0.2);
+  --bg-dark: #fafafa;
+  --bg-card: rgba(255, 255, 255, 0.5);
+  --neon-blue: #0066ff;
+  --accent: var(--neon-blue);
+  --text-main: #111111;
+  --text-dim: #666666;
+  --glass-border: rgba(0, 0, 0, 0.05);
+  --selection: rgba(0, 102, 255, 0.1);
 }
 
 * {
@@ -70,24 +71,21 @@ h6 {
 
 /* Neon Text & Background */
 .neon-text-blue {
-  color: var(--neon-blue);
-  text-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
-}
-
-.neon-text-purple {
-  color: var(--neon-purple);
-  text-shadow: 0 0 10px rgba(112, 0, 255, 0.5);
+  color: var(--accent);
 }
 
 .neon-btn-blue {
   background: transparent;
-  border: 1px solid var(--neon-blue);
-  color: var(--neon-blue);
-  padding: 12px 24px;
-  border-radius: 8px;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  padding: 14px 32px;
+  border-radius: 4px;
   cursor: pointer;
   font-weight: 600;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.75rem;
 }
 
 .neon-btn-blue:hover {

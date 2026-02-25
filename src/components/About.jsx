@@ -27,48 +27,54 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="py-24 px-6 border-t border-white/5">
-      <div className="flex flex-col lg:flex-row gap-16">
+    <section id="about" className="py-32 px-6 border-t border-white/5">
+      <div className="flex flex-col lg:flex-row gap-20 items-center">
         <div className="lg:w-1/2">
            <motion.div
-             initial={{ opacity: 0, x: -20 }}
-             whileInView={{ opacity: 1, x: 0 }}
+             initial={{ opacity: 0, y: 20 }}
+             whileInView={{ opacity: 1, y: 0 }}
              viewport={{ once: true }}
+             transition={{ duration: 0.8 }}
            >
-              <h2 className="text-4xl md:text-5xl font-bold mb-8">
-                Turning Ideas into <br />
-                <span className="neon-text-blue">Functional Art.</span>
+              <h2 className="text-5xl md:text-7xl font-black mb-10 leading-none tracking-tighter">
+                Expressive<br />
+                <span className="text-[var(--accent)]">Logic.</span>
               </h2>
-              <div className="space-y-6 text-[var(--text-dim)] text-lg leading-relaxed">
+              <div className="space-y-8 text-[var(--text-dim)] text-xl leading-relaxed font-light">
                 <p>
-                  As a Computer Science student at <span className="text-[var(--neon-blue)]">IFIAG</span>, I specialize in bridging 
-                  the gap between logical backend structures and visually stunning frontend experiences. 
+                  I'm <span className="text-[var(--text-main)] font-semibold">Ilyas Ait Oulhiane</span>. 
+                  A computer science student at IFIAG who found that code is more than just instructions — it's a medium for creation.
                 </p>
                 <p>
-                  My journey is driven by a <span className="italic">self-taught mindset</span> and an obsession 
-                  with creative problem-solving. Whether it's crafting 3D assets in Blender or optimizing a React 
-                  application, I aim for excellence in every pixel.
+                  I don't just "build websites." I craft digital environments where technical precision 
+                  meets emotional design. My focus is on the intersection of clean architecture and 
+                  unforgettable interfaces.
                 </p>
-                <p className="border-l-2 border-[var(--neon-blue)] pl-6 font-medium text-[var(--text-main)] italic">
-                  Currently seeking a 1-3 month internship to contribute my skills to a dynamic team.
-                </p>
+                <div className="pt-8 border-t border-white/5">
+                    <p className="text-sm uppercase tracking-widest font-bold text-[var(--accent)] mb-4">The Goal</p>
+                    <p className="text-[var(--text-main)] italic">
+                      Currently seeking an internship to merge my creative drive with professional challenges.
+                    </p>
+                </div>
               </div>
            </motion.div>
         </div>
 
-        <div className="lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div className="lg:w-1/2 grid grid-cols-1 gap-4">
           {cards.map((card, i) => (
             <motion.div
                 key={i}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="glass p-8 rounded-2xl glass-hover"
+                transition={{ delay: i * 0.1, duration: 0.5 }}
+                className="group flex items-start gap-6 p-8 rounded-lg border border-transparent hover:border-white/5 hover:bg-white/[0.02] transition-all"
             >
-                <div className="mb-4">{card.icon}</div>
-                <h3 className="text-xl font-bold mb-2">{card.title}</h3>
-                <p className="text-[#a0a0a0] text-sm leading-relaxed">{card.text}</p>
+                <div className="mt-1 opacity-50 group-hover:opacity-100 transition-opacity">{card.icon}</div>
+                <div>
+                    <h3 className="text-lg font-bold mb-1 uppercase tracking-wider">{card.title}</h3>
+                    <p className="text-[var(--text-dim)] text-sm font-light max-w-sm">{card.text}</p>
+                </div>
             </motion.div>
           ))}
         </div>

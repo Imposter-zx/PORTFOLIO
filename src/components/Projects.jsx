@@ -38,86 +38,76 @@ const Projects = () => {
   }, []);
 
   return (
-    <section id="projects" className="py-24 px-6">
-      <div className="flex justify-between items-end mb-16">
-        <div>
-          <h2 className="text-4xl font-bold mb-2">My <span className="neon-text-purple">Projects</span></h2>
-          <p className="text-[var(--text-dim)]">Featured work and experiments from my GitHub.</p>
-        </div>
-        <a 
-          href="https://github.com/Imposter-zx" 
-          target="_blank"
-          className="hidden md:flex items-center space-x-2 text-sm font-medium text-[var(--text-dim)] hover:text-[var(--neon-blue)] transition-all"
-        >
-          <span>View all repos</span>
-          <ExternalLink className="w-4 h-4" />
-        </a>
+    <section id="projects" className="py-32 px-6">
+      <div className="mb-20">
+        <h2 className="text-5xl md:text-7xl font-black mb-4 tracking-tighter uppercase">
+          Selected<br />
+          <span className="text-[var(--accent)]">Work.</span>
+        </h2>
+        <p className="text-[var(--text-dim)] text-xl font-light">A curation of projects defining my technical range.</p>
       </div>
 
       {loading ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[1, 2, 3].map(i => (
-                <div key={i} className="h-64 glass animate-pulse rounded-2xl"></div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            {[1, 2].map(i => (
+                <div key={i} className="h-96 bg-white/[0.02] animate-pulse rounded-lg"></div>
             ))}
         </div>
       ) : error ? (
-        <div className="glass p-12 rounded-3xl flex flex-col items-center justify-center text-center">
+        <div className=" glass p-12 rounded-lg flex flex-col items-center justify-center text-center">
             <AlertCircle className="w-12 h-12 text-red-500 mb-4" />
-            <h3 className="text-xl font-bold mb-2">Couldn't load projects</h3>
-            <p className="text-[#a0a0a0]">But you can still check them out on GitHub!</p>
-            <a href="https://github.com/Imposter-zx" target="_blank" className="mt-6 neon-btn-blue">Go to GitHub</a>
+            <h3 className="text-xl font-black uppercase mb-2 text-[var(--text-main)]">Sync Failed</h3>
+            <p className="text-[var(--text-dim)]">GitHub API unreachable. Please check my profile manually.</p>
+            <a href="https://github.com/Imposter-zx" target="_blank" className="mt-8 neon-btn-blue">Go to GitHub</a>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
           <AnimatePresence>
             {projects.map((repo, i) => (
               <motion.div
                 key={repo.id}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="glass rounded-2xl overflow-hidden group border-white/5 flex flex-col"
+                transition={{ delay: i * 0.1, duration: 0.8 }}
+                className="group relative flex flex-col border-b border-white/5 pb-12 last:border-0"
               >
-                <div className="p-8 flex-1">
-                  <div className="flex justify-between items-start mb-6">
-                    <div className="w-12 h-12 bg-[#7000ff]/10 rounded-xl flex items-center justify-center border border-[#7000ff]/30 text-[#7000ff]">
-                        <Folder className="w-6 h-6" />
-                    </div>
-                    <div className="flex space-x-3">
-                        <a href={repo.html_url} target="_blank" className="text-[#a0a0a0] hover:text-white"><Github className="w-5 h-5" /></a>
-                        {repo.homepage && <a href={repo.homepage} target="_blank" className="text-[#a0a0a0] hover:text-[#00f2ff]"><ExternalLink className="w-5 h-5" /></a>}
-                    </div>
-                  </div>
-                  
-                  <h3 className="text-xl font-bold mb-3 group-hover:neon-text-blue transition-all">{repo.name}</h3>
-                  <p className="text-[#a0a0a0] text-sm mb-6 line-clamp-2">
-                    {repo.description || "No description provided. Click to view repository on GitHub."}
-                  </p>
-                  
-                  <div className="flex flex-wrap gap-2">
-                    {(repo.topics || []).slice(0, 3).map(topic => (
-                      <span key={topic} className="text-[10px] uppercase font-bold text-[#666] border border-white/5 px-2 py-0.5 rounded">
-                        {topic}
-                      </span>
-                    ))}
-                    {repo.language && (
-                      <span className="text-[10px] uppercase font-bold text-[#00f2ff] bg-[#00f2ff]/5 border border-[#00f2ff]/20 px-2 py-0.5 rounded">
-                        {repo.language}
-                      </span>
-                    )}
+                <div className="flex justify-between items-start mb-8">
+                  <span className="text-[10px] font-mono opacity-30 group-hover:opacity-100 transition-opacity">0{i + 1}</span>
+                  <div className="flex space-x-4">
+                      <a href={repo.html_url} target="_blank" className="text-[var(--text-dim)] hover:text-[var(--text-main)] transition-colors"><Github className="w-5 h-5" /></a>
+                      {repo.homepage && <a href={repo.homepage} target="_blank" className="text-[var(--text-dim)] hover:text-[var(--accent)] transition-colors"><ExternalLink className="w-5 h-5" /></a>}
                   </div>
                 </div>
                 
-                <div className="px-8 py-4 bg-white/[0.02] border-t border-white/5 flex items-center justify-between">
-                    <div className="flex items-center text-xs text-[#666]">
-                        <Star className="w-3 h-3 mr-1 fill-yellow-500/50 text-yellow-500" />
-                        {repo.stargazers_count} stars
-                    </div>
-                    <div className="text-[10px] text-[#444] font-mono">
-                        {new Date(repo.updated_at).toLocaleDateString()}
-                    </div>
+                <h3 className="text-4xl md:text-5xl font-black mb-4 tracking-tighter uppercase group-hover:text-[var(--accent)] transition-colors">
+                  {repo.name.replace(/-/g, ' ')}
+                </h3>
+                
+                <p className="text-[var(--text-dim)] text-lg font-light mb-8 max-w-xl leading-relaxed">
+                  {repo.description || "Experimental development focusing on interaction and robust architecture."}
+                </p>
+                
+                <div className="flex flex-wrap gap-4 mt-auto">
+                  {repo.language && (
+                    <span className="text-[10px] uppercase font-bold tracking-[0.2em] text-[var(--accent)]">
+                      {repo.language}
+                    </span>
+                  )}
+                  {(repo.topics || []).slice(0, 3).map(topic => (
+                    <span key={topic} className="text-[10px] uppercase font-bold tracking-[0.2em] text-[var(--text-dim)] opacity-50">
+                      {topic}
+                    </span>
+                  ))}
                 </div>
+
+                <motion.div 
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.5, duration: 1 }}
+                  className="absolute bottom-0 left-0 h-[2px] w-full bg-gradient-to-r from-[var(--accent)] to-transparent opacity-30 origin-left"
+                />
               </motion.div>
             ))}
           </AnimatePresence>

@@ -24,14 +24,13 @@ const Navbar = ({ isDark, toggleTheme }) => {
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'py-4 glass' : 'py-6 bg-transparent'}`}>
       <div className="container mx-auto px-6 flex justify-between items-center">
         <motion.div 
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          className="flex items-center space-x-2 cursor-pointer"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="cursor-pointer group"
         >
-          <div className="w-10 h-10 bg-gradient-to-br from-[#00f2ff] to-[#7000ff] rounded-lg flex items-center justify-center">
-            <Terminal className="text-white w-6 h-6" />
-          </div>
-          <span className="text-xl font-bold tracking-tighter neon-text-blue">IAO design.</span>
+          <span className="text-lg font-black tracking-tighter uppercase group-hover:text-[var(--accent)] transition-colors">
+            Ilyas<span className="font-light opacity-50 block text-[10px] tracking-[0.4em] leading-none">Creative Dev</span>
+          </span>
         </motion.div>
 
         {/* Desktop Nav */}
@@ -43,7 +42,7 @@ const Navbar = ({ isDark, toggleTheme }) => {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
-              className="text-sm font-medium text-[#a0a0a0] hover:text-[#00f2ff] transition-colors"
+              className="text-[10px] uppercase tracking-[0.3em] font-bold text-[var(--text-dim)] hover:text-[var(--text-main)] transition-colors"
             >
               {link.name}
             </motion.a>

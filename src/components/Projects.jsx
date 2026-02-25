@@ -10,10 +10,24 @@ const Projects = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await fetch('https://api.github.com/users/Imposter-zx/repos?sort=updated&per_page=6');
+        const response = await fetch('https://api.github.com/users/Imposter-zx/repos?per_page=100');
         if (!response.ok) throw new Error('Failed to fetch projects');
         const data = await response.json();
-        setProjects(data.filter(repo => !repo.fork));
+        
+        const targetRepos = [
+          'Car-Rental',
+          'MediLink',
+          'Java-Client-Server-Application',
+          'AegisScan-OpenCore',
+          'Dim',
+          'PORTFOLIO'
+        ];
+
+        const filtered = data
+          .filter(repo => targetRepos.includes(repo.name))
+          .sort((a, b) => targetRepos.indexOf(a.name) - targetRepos.indexOf(b.name));
+
+        setProjects(filtered);
         setLoading(false);
       } catch (err) {
         setError(err.message);

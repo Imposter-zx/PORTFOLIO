@@ -68,24 +68,25 @@ const Projects = () => {
                 key={repo.id}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{ scale: 1.01, transition: { duration: 0.2 } }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.8 }}
-                className="group relative flex flex-col border-b border-white/5 pb-12 last:border-0"
+                className="group relative flex flex-col border-b border-white/5 pb-12 last:border-0 hover:shadow-[0_20px_50px_rgba(59,130,246,0.05)] transition-shadow p-4 rounded-xl"
               >
                 <div className="flex justify-between items-start mb-8">
-                  <span className="text-[10px] font-mono opacity-30 group-hover:opacity-100 transition-opacity">0{i + 1}</span>
+                  <span className="text-[10px] font-mono opacity-30 group-hover:opacity-100 transition-opacity">PROCESS_0{i + 1}</span>
                   <div className="flex space-x-4">
                       <a href={repo.html_url} target="_blank" className="text-[var(--text-dim)] hover:text-[var(--text-main)] transition-colors"><Github className="w-5 h-5" /></a>
                       {repo.homepage && <a href={repo.homepage} target="_blank" className="text-[var(--text-dim)] hover:text-[var(--accent)] transition-colors"><ExternalLink className="w-5 h-5" /></a>}
                   </div>
                 </div>
                 
-                <h3 className="text-4xl md:text-5xl font-black mb-4 tracking-tighter uppercase group-hover:text-[var(--accent)] transition-colors">
+                <h3 className="text-4xl md:text-5xl font-black mb-4 tracking-tighter uppercase group-hover:text-[var(--accent)] transition-colors underline-offset-8 decoration-1 group-hover:underline">
                   {repo.name.replace(/-/g, ' ')}
                 </h3>
                 
                 <p className="text-[var(--text-dim)] text-lg font-light mb-8 max-w-xl leading-relaxed">
-                  {repo.description || "Experimental development focusing on interaction and robust architecture."}
+                  {repo.description || "Building robust architecture through iterative experimentation and digital intent."}
                 </p>
                 
                 <div className="flex flex-wrap gap-4 mt-auto">
@@ -95,19 +96,19 @@ const Projects = () => {
                     </span>
                   )}
                   {(repo.topics || []).slice(0, 3).map(topic => (
-                    <span key={topic} className="text-[10px] uppercase font-bold tracking-[0.2em] text-[var(--text-dim)] opacity-50">
+                    <span key={topic} className="text-[10px] uppercase font-bold tracking-[0.3em] text-[var(--text-dim)] opacity-40">
                       {topic}
                     </span>
                   ))}
                 </div>
 
-                <motion.div 
-                  initial={{ scaleX: 0 }}
-                  whileInView={{ scaleX: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.5, duration: 1 }}
-                  className="absolute bottom-0 left-0 h-[2px] w-full bg-gradient-to-r from-[var(--accent)] to-transparent opacity-30 origin-left"
-                />
+                <a 
+                  href={repo.html_url} 
+                  target="_blank" 
+                  className="mt-8 text-[10px] uppercase font-black tracking-widest text-[var(--accent)] opacity-0 group-hover:opacity-100 transition-all transform translate-y-2 group-hover:translate-y-0"
+                >
+                  View on GitHub →
+                </a>
               </motion.div>
             ))}
           </AnimatePresence>

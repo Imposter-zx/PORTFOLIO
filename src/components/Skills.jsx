@@ -39,7 +39,7 @@ const Skills = () => {
         <p className="text-[var(--text-dim)] text-xl font-light text-right">The tools I use to turn logic into art.</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
         {skillCategories.map((group, i) => (
           <motion.div
             key={i}

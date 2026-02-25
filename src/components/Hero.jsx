@@ -1,48 +1,50 @@
-import React from 'react';
 import { motion } from 'framer-motion';
-import { Typewriter } from 'react-simple-typewriter';
-import { ChevronRight, Download, MousePointer2 } from 'lucide-react';
+import { ChevronRight, MousePointer2 } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
 const Hero = () => {
+  const [showButtons, setShowButtons] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowButtons(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <section id="home" className="min-h-screen flex flex-col justify-center pt-20 px-6">
+    <section id="home" className="min-h-screen flex flex-col justify-center pt-20 px-6 relative overflow-hidden">
       <div className="max-w-4xl">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
         >
-          <span className="text-[var(--accent)] text-xs font-mono mb-8 inline-block uppercase tracking-[0.3em]">
-            Available for Internships 2026
+          <span className="text-[var(--accent)] text-xs font-mono mb-8 inline-block uppercase tracking-[0.4em]">
+            Creative Developer
           </span>
           <h1 className="text-6xl md:text-9xl font-black mb-10 leading-[0.9] tracking-tighter">
-            Digital<br />
-            <span className="text-[var(--accent)]">Execution.</span><br />
-            <span className="text-[var(--text-dim)] font-light">Human Intent.</span>
+            I turn code<br />
+            <span className="text-[var(--accent)]">into interactive</span><br />
+            <span className="text-[var(--text-dim)] font-light">experiences.</span>
           </h1>
         </motion.div>
 
         <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
-            className="max-w-xl text-lg md:text-xl text-[var(--text-dim)] mb-12 font-light leading-relaxed"
-        >
-            Ilyas Ait Oulhiane — A Creative Developer based in Morocco, 
-            bridging the gap between rigid logic and expressive digital experiences.
-        </motion.div>
-
-        <motion.div
-           initial={{ opacity: 0, y: 20 }}
-           animate={{ opacity: 1, y: 0 }}
-           transition={{ delay: 0.6 }}
-           className="flex flex-wrap gap-8 items-center"
+            animate={{ 
+                opacity: showButtons ? 1 : 0,
+                y: showButtons ? 0 : 20
+            }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="flex flex-wrap gap-8 items-center"
         >
             <button className="neon-btn-blue group">
                 Selected Work
             </button>
             <button className="text-sm uppercase tracking-widest font-bold text-[var(--text-dim)] hover:text-[var(--text-main)] transition-colors flex items-center group">
-                Contact Me
+                Connect
                 <ChevronRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
         </motion.div>

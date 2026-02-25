@@ -5,22 +5,22 @@ import { Code, Palette, Zap, Cpu } from 'lucide-react';
 const About = () => {
   const cards = [
     {
-      icon: <Code className="w-8 h-8 text-[#00f2ff]" />,
+      icon: <Code className="w-8 h-8 text-[var(--accent)]" />,
       title: "Clean Code",
       text: "Writing maintainable, scalable and efficient code is my priority. I love architectural challenges."
     },
     {
-      icon: <Palette className="w-8 h-8 text-[#7000ff]" />,
+      icon: <Palette className="w-8 h-8 text-[var(--accent)]" />,
       title: "UI/UX Mastery",
       text: "Blending technical logic with aesthetic design to create intuitive user journeys."
     },
     {
-      icon: <Zap className="w-8 h-8 text-[#ff00e6]" />,
+      icon: <Zap className="w-8 h-8 text-[var(--accent)]" />,
       title: "Fast Learner",
       text: "Passionate about exploring new technologies and staying ahead of industry trends."
     },
     {
-      icon: <Cpu className="w-8 h-8 text-[#00ff9d]" />,
+      icon: <Cpu className="w-8 h-8 text-[var(--accent)]" />,
       title: "Systems Thinker",
       text: "Understanding how components interact within complex systems to build robust solutions."
     }

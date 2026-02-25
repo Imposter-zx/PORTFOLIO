@@ -30,33 +30,33 @@ const Skills = () => {
   ];
 
   return (
-    <section id="skills" className="py-24 px-6">
-      <div className="text-center mb-16">
-        <h2 className="text-4xl font-bold mb-4">Core <span className="neon-text-blue">Tech Stack</span></h2>
-        <p className="text-[var(--text-dim)] max-w-xl mx-auto">
-          A collection of tools and technologies I use to bring ideas to digital life.
-        </p>
+    <section id="skills" className="py-32 px-6">
+      <div className="mb-20">
+        <h2 className="text-5xl md:text-8xl font-black mb-4 tracking-tighter uppercase text-right">
+          Technical<br />
+          <span className="text-[var(--accent)]">Stack.</span>
+        </h2>
+        <p className="text-[var(--text-dim)] text-xl font-light text-right">The tools I use to turn logic into art.</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        {skillCategories.map((cat, i) => (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {skillCategories.map((group, i) => (
           <motion.div
             key={i}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.1 }}
-            className={`glass p-6 rounded-2xl border ${cat.borderColor} bg-gradient-to-br ${cat.color} hover:scale-[1.02] transition-all`}
+            className="p-10 border border-white/5 rounded-lg hover:border-[var(--accent)] transition-all duration-500 group"
           >
-            <h3 className="text-xl font-bold mb-6 flex items-center">
-                <div className="w-2 h-2 rounded-full bg-[var(--text-main)] mr-3 shadow-[0_0_10px_var(--text-main)]"></div>
-                {cat.title}
+            <h3 className="text-xs uppercase font-bold tracking-[0.3em] mb-8 text-[var(--text-dim)] group-hover:text-[var(--accent)] transition-colors">
+              {group.title}
             </h3>
-            <div className="flex flex-wrap gap-2">
-              {cat.skills.map((skill, j) => (
+            <div className="flex flex-wrap gap-4">
+              {group.skills.map((skill) => (
                 <span 
-                  key={j}
-                  className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium text-[var(--text-main)]/80 hover:bg-white/10 transition-colors"
+                  key={skill} 
+                  className="text-sm font-light text-[var(--text-dim)] group-hover:text-[var(--text-main)] transition-colors border-b border-white/5 pb-1"
                 >
                   {skill}
                 </span>
@@ -65,33 +65,6 @@ const Skills = () => {
           </motion.div>
         ))}
       </div>
-
-      {/* Experience / Learning Brief */}
-      <motion.div 
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        className="mt-20 glass p-8 rounded-3xl border-dashed border-[var(--glass-border)] flex flex-col md:flex-row items-center justify-between gap-8"
-      >
-        <div className="flex-1">
-            <h3 className="text-2xl font-bold mb-2">Learning <span className="text-[var(--neon-purple)]">Journey</span></h3>
-            <p className="text-[var(--text-dim)]">
-                Currently a student at IFIAG, I maintain a constant flow of learning through documentation, 
-                open-source contributions, and personal projects. My focus is on mastering 
-                full-stack development and creative motion design.
-            </p>
-        </div>
-        <div className="flex gap-4">
-            <div className="text-center px-6 py-4 rounded-2xl bg-white/5 border border-white/10">
-                <div className="text-3xl font-black text-[#00f2ff]">2+</div>
-                <div className="text-[10px] uppercase tracking-widest text-[#666]">Years Coding</div>
-            </div>
-            <div className="text-center px-6 py-4 rounded-2xl bg-white/5 border border-white/10">
-                <div className="text-3xl font-black text-[#7000ff]">15+</div>
-                <div className="text-[10px] uppercase tracking-widest text-[#666]">Projects</div>
-            </div>
-        </div>
-      </motion.div>
     </section>
   );
 };

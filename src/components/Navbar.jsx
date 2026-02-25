@@ -34,7 +34,7 @@ const Navbar = ({ isDark, toggleTheme }) => {
         </motion.div>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex items-center space-x-8">
+        <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link, i) => (
             <motion.a
               key={link.name}

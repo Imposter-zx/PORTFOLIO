@@ -6,7 +6,8 @@
 :root {
   --bg-dark: #070707;
   --bg-card: rgba(18, 18, 18, 0.4);
-  --neon-blue: #3b82f6;
+  --neon-blue: #00f2ff;
+  /* Restored original cyan for futuristic feel */
   --accent: var(--neon-blue);
   --text-main: #f5f5f5;
   --text-dim: #a1a1aa;

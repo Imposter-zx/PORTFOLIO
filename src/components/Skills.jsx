@@ -32,11 +32,11 @@ const Skills = () => {
   return (
     <section id="skills" className="py-32 px-6">
       <div className="mb-20">
-        <h2 className="text-5xl md:text-8xl font-black mb-4 tracking-tighter uppercase text-right">
+        <h2 className="text-[var(--fs-4xl)] font-black mb-4 tracking-tighter uppercase text-right leading-none">
           Technical<br />
           <span className="text-[var(--accent)]">Stack.</span>
         </h2>
-        <p className="text-[var(--text-dim)] text-xl font-light text-right">The tools I use to turn logic into art.</p>
+        <p className="text-[var(--text-dim)] text-[var(--fs-base)] font-light text-right">The tools I use to turn logic into art.</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -54,8 +54,8 @@ const Skills = () => {
             </h3>
             <div className="flex flex-wrap gap-4">
               {group.skills.map((skill) => (
-                <span 
-                  key={skill} 
+                <span
+                  key={skill}
                   className="text-sm font-light text-[var(--text-dim)] group-hover:text-[var(--text-main)] transition-colors border-b border-white/5 pb-1"
                 >
                   {skill}

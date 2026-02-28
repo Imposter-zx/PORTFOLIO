@@ -9,10 +9,22 @@
   --neon-blue: #3b82f6;
   --accent: var(--neon-blue);
   --text-main: #f5f5f5;
-  --text-dim: #888888;
+  --text-dim: #a1a1aa;
+  /* Updated for better contrast (Zinc-400) */
   --glass-border: rgba(255, 255, 255, 0.05);
-  --selection: rgba(0, 242, 255, 0.2);
+  --selection: rgba(59, 130, 246, 0.2);
   --edge-spacing: clamp(1.5rem, 5vw, 4rem);
+
+  /* Fluid Typography Scale */
+  --fs-xs: clamp(0.7rem, 0.6rem + 0.5vw, 0.875rem);
+  --fs-sm: clamp(0.8rem, 0.7rem + 0.5vw, 1rem);
+  --fs-base: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
+  --fs-lg: clamp(1.125rem, 1rem + 0.6vw, 1.25rem);
+  --fs-xl: clamp(1.25rem, 1.1rem + 0.8vw, 1.5rem);
+  --fs-2xl: clamp(1.5rem, 1.3rem + 1vw, 2rem);
+  --fs-3xl: clamp(2rem, 1.8rem + 1.5vw, 3rem);
+  --fs-4xl: clamp(2.5rem, 2rem + 3vw, 5rem);
+  --fs-huge: clamp(3.5rem, 3rem + 10vw, 10rem);
 }
 
 .light {
@@ -21,7 +33,8 @@
   --neon-blue: #0066ff;
   --accent: var(--neon-blue);
   --text-main: #111111;
-  --text-dim: #666666;
+  --text-dim: #71717a;
+  /* Updated for light mode contrast */
   --glass-border: rgba(0, 0, 0, 0.05);
   --selection: rgba(0, 102, 255, 0.1);
 }
@@ -117,9 +130,11 @@ h6 {
   0% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-10px);
   }
+
   100% {
     transform: translateY(0px);
   }

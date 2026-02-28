@@ -23,7 +23,7 @@ const Navbar = ({ isDark, toggleTheme }) => {
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'py-4 glass' : 'py-6 bg-transparent'}`}>
       <div className="container mx-auto px-6 flex justify-between items-center">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           className="cursor-pointer group"
@@ -42,7 +42,7 @@ const Navbar = ({ isDark, toggleTheme }) => {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
-              className="text-[10px] uppercase tracking-[0.3em] font-bold text-[var(--text-dim)] hover:text-[var(--text-main)] transition-colors"
+              className="text-[12px] uppercase tracking-[0.2em] font-bold text-[var(--text-dim)] hover:text-[var(--text-main)] transition-colors"
             >
               {link.name}
             </motion.a>
@@ -55,7 +55,7 @@ const Navbar = ({ isDark, toggleTheme }) => {
           >
             {isDark ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-indigo-600" />}
           </motion.button>
-          
+
           <motion.a
             href="https://github.com/Imposter-zx"
             target="_blank"
@@ -80,17 +80,17 @@ const Navbar = ({ isDark, toggleTheme }) => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: 'auto' }}
           className="md:hidden glass border-t border-white/5 bg-black/90 p-6 flex flex-col space-y-4"
         >
           {navLinks.map((link) => (
-            <a 
-              key={link.name} 
-              href={link.href} 
+            <a
+              key={link.name}
+              href={link.href}
               onClick={() => setIsMobileMenuOpen(false)}
-              className="text-lg font-medium text-[#a0a0a0] hover:text-[#00f2ff]"
+              className="text-2xl font-black uppercase tracking-tighter text-[var(--text-dim)] hover:text-[var(--accent)] transition-colors"
             >
               {link.name}
             </a>

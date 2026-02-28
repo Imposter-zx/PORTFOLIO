@@ -1,7 +1,6 @@
 @import "tailwindcss";
-@config "../tailwind.config.js";
-
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap");
+@config "../tailwind.config.js";
 
 :root {
   --bg-dark: #070707;
@@ -40,10 +39,12 @@
   --selection: rgba(0, 102, 255, 0.1);
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 }
 
 body {

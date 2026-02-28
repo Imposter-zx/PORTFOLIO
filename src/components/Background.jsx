@@ -1,71 +1,234 @@
-import React, { useCallback } from "react";
-import { loadSlim } from "@tsparticles/slim";
-import Particles from "@tsparticles/react";
+import React, { useEffect, useRef, useMemo } from "react";
+
+// Perlin Noise implementation
+class Grad {
+  constructor(x, y, z) {
+    this.x = x;
+    this.y = y;
+    this.z = z;
+  }
+  dot2(x, y) {
+    return this.x * x + this.y * y;
+  }
+}
+
+class Noise {
+  constructor(seed = 0) {
+    this.grad3 = [
+      new Grad(1, 1, 0), new Grad(-1, 1, 0), new Grad(1, -1, 0), new Grad(-1, -1, 0),
+      new Grad(1, 0, 1), new Grad(-1, 0, 1), new Grad(1, 0, -1), new Grad(-1, 0, -1),
+      new Grad(0, 1, 1), new Grad(0, -1, 1), new Grad(0, 1, -1), new Grad(0, -1, -1)
+    ];
+
+    this.p = [151, 160, 137, 91, 90, 15, 131, 13, 201, 95, 96, 53, 194, 233, 7, 225, 140, 36, 103, 30, 69, 142, 8, 99, 37, 240, 21, 10, 23,
+      190, 6, 148, 247, 120, 234, 75, 0, 26, 197, 62, 94, 252, 219, 203, 117, 35, 11, 32, 57, 177, 33, 88, 237, 149, 56, 87, 174, 20, 125, 136, 171, 168, 68, 175, 74, 165, 71, 134, 139, 48, 27, 166,
+      77, 146, 158, 231, 83, 111, 229, 122, 60, 211, 133, 230, 220, 105, 92, 41, 55, 46, 245, 40, 244, 102, 143, 54, 65, 25, 63, 161, 1, 216, 80, 73, 209, 76, 132, 187, 208, 89, 18, 169, 200, 196,
+      135, 130, 116, 188, 159, 86, 164, 100, 109, 198, 173, 186, 3, 64, 52, 217, 226, 250, 124, 123, 5, 202, 38, 147, 118, 126, 255, 82, 85, 212, 207, 206, 59, 227, 47, 16, 58, 17, 182, 189, 28, 42,
+      223, 183, 170, 213, 119, 248, 152, 2, 44, 154, 163, 70, 221, 153, 101, 155, 167, 43, 172, 9, 129, 22, 39, 253, 19, 98, 108, 110, 79, 113, 224, 232, 178, 185, 112, 104, 218, 246, 97, 228,
+      251, 34, 242, 193, 238, 210, 144, 12, 191, 179, 162, 241, 81, 51, 145, 235, 249, 14, 239, 107, 49, 192, 214, 31, 181, 199, 106, 157, 184, 84, 204, 176, 115, 121, 50, 45, 127, 4, 150, 254,
+      138, 236, 205, 93, 222, 114, 67, 29, 24, 72, 243, 141, 128, 195, 78, 66, 215, 61, 156, 180];
+
+    this.perm = new Array(512);
+    this.gradP = new Array(512);
+    this.seed(seed);
+  }
+
+  seed(seed) {
+    if (seed > 0 && seed < 1) seed *= 65536;
+    seed = Math.floor(seed);
+    if (seed < 256) seed |= seed << 8;
+    for (let i = 0; i < 256; i++) {
+      let v = (i & 1) ? this.p[i] ^ (seed & 255) : this.p[i] ^ ((seed >> 8) & 255);
+      this.perm[i] = this.perm[i + 256] = v;
+      this.gradP[i] = this.gradP[i + 256] = this.grad3[v % 12];
+    }
+  }
+
+  fade(t) { return t * t * t * (t * (t * 6 - 15) + 10); }
+  lerp(a, b, t) { return (1 - t) * a + t * b; }
+  perlin2(x, y) {
+    let X = Math.floor(x), Y = Math.floor(y);
+    x -= X; y -= Y;
+    X = X & 255; Y = Y & 255;
+    const n00 = this.gradP[X + this.perm[Y]].dot2(x, y);
+    const n01 = this.gradP[X + this.perm[Y + 1]].dot2(x, y - 1);
+    const n10 = this.gradP[X + 1 + this.perm[Y]].dot2(x - 1, y);
+    const n11 = this.gradP[X + 1 + this.perm[Y + 1]].dot2(x - 1, y - 1);
+    const u = this.fade(x);
+    return this.lerp(this.lerp(n00, n10, u), this.lerp(n01, n11, u), this.fade(y));
+  }
+}
 
 const Background = ({ isDark }) => {
-  const particlesInit = useCallback(async (engine) => {
-    await loadSlim(engine);
-  }, []);
+  const containerRef = useRef(null);
+  const svgRef = useRef(null);
+  const mouse = useRef({ x: -1000, y: -1000, sx: -1000, sy: -1000, lx: 0, ly: 0, v: 0, vs: 0, a: 0 });
+  const lines = useRef([]);
+  const noise = useMemo(() => new Noise(Math.random()), []);
+  const rafRef = useRef(null);
 
-  const themeColor = isDark ? "#00f2ff" : "#0088ff";
+  const colors = {
+    bg: "#f40c3f",
+    line: "#160000",
+    dot: "#160000"
+  };
+
+  useEffect(() => {
+    const setSize = () => {
+      if (!svgRef.current) return;
+      const { width, height } = containerRef.current.getBoundingClientRect();
+      svgRef.current.setAttribute("viewBox", `0 0 ${width} ${height}`);
+      setLines(width, height);
+    };
+
+    const setLines = (width, height) => {
+      const spacing = 40;
+      const count = Math.ceil(width / spacing) + 1;
+      const pointsCount = Math.ceil(height / 10);
+      const newLines = [];
+
+      for (let i = 0; i < count; i++) {
+        const linePoints = [];
+        const x = i * spacing;
+        for (let j = 0; j < pointsCount; j++) {
+          linePoints.push({
+            x: x,
+            y: j * 10,
+            originX: x,
+            originY: j * 10,
+            wave: { x: 0, y: 0 },
+            cursor: { x: 0, y: 0, vx: 0, vy: 0 }
+          });
+        }
+        newLines.push(linePoints);
+      }
+      lines.current = newLines;
+    };
+
+    const tick = (time) => {
+      mouse.current.sx += (mouse.current.x - mouse.current.sx) * 0.1;
+      mouse.current.sy += (mouse.current.y - mouse.current.sy) * 0.1;
+
+      const dx = mouse.current.sx - mouse.current.lx;
+      const dy = mouse.current.sy - mouse.current.ly;
+      const d = Math.hypot(dx, dy);
+
+      mouse.current.v = d;
+      mouse.current.vs += (d - mouse.current.vs) * 0.1;
+      mouse.current.a = Math.atan2(dy, dx);
+      mouse.current.lx = mouse.current.sx;
+      mouse.current.ly = mouse.current.sy;
+
+      // Update Cursor Circle in CSS variable
+      if (containerRef.current) {
+        containerRef.current.style.setProperty("--mx", `${mouse.current.sx}px`);
+        containerRef.current.style.setProperty("--my", `${mouse.current.sy}px`);
+      }
+
+      movePoints(time);
+      drawLines();
+      rafRef.current = requestAnimationFrame(tick);
+    };
+
+    const movePoints = (time) => {
+      lines.current.forEach((line) => {
+        line.forEach((p) => {
+          const move = noise.perlin2((p.originX + time * 0.01) * 0.002, (p.originY + time * 0.005) * 0.002) * 12;
+          p.wave.x = Math.cos(move) * 32;
+          p.wave.y = Math.sin(move) * 16;
+
+          const dx = p.originX - mouse.current.sx;
+          const dy = p.originY - mouse.current.sy;
+          const d = Math.hypot(dx, dy);
+
+          if (d < 200) {
+            const s = 1 - d / 200;
+            p.cursor.vx += Math.cos(mouse.current.a) * s * 120 * mouse.current.vs * 0.0005;
+            p.cursor.vy += Math.sin(mouse.current.a) * s * 120 * mouse.current.vs * 0.0005;
+          }
+
+          p.cursor.vx += (0 - p.cursor.x) * 0.05;
+          p.cursor.vy += (0 - p.cursor.y) * 0.05;
+          p.cursor.vx *= 0.95;
+          p.cursor.vy *= 0.95;
+          p.cursor.x += p.cursor.vx;
+          p.cursor.y += p.cursor.vy;
+
+          p.x = p.originX + p.wave.x + p.cursor.x;
+          p.y = p.originY + p.wave.y + p.cursor.y;
+        });
+      });
+    };
+
+    const drawLines = () => {
+      if (!svgRef.current) return;
+
+      // Cleanup previous paths
+      while (svgRef.current.firstChild) {
+        svgRef.current.removeChild(svgRef.current.firstChild);
+      }
+
+      lines.current.forEach((line) => {
+        const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        let d = `M ${line[0].x} ${line[0].y}`;
+
+        for (let i = 1; i < line.length - 2; i++) {
+          const xc = (line[i].x + line[i + 1].x) / 2;
+          const yc = (line[i].y + line[i + 1].y) / 2;
+          d += ` Q ${line[i].x} ${line[i].y} ${xc} ${yc}`;
+        }
+
+        // Connect last points
+        const n = line.length;
+        if (n > 2) {
+          d += ` Q ${line[n - 2].x} ${line[n - 2].y} ${line[n - 1].x} ${line[n - 1].y}`;
+        }
+
+        path.setAttribute("d", d);
+        path.setAttribute("fill", "none");
+        path.setAttribute("stroke", colors.line);
+        path.setAttribute("stroke-width", "1");
+        path.setAttribute("opacity", "0.2");
+        svgRef.current.appendChild(path);
+      });
+    };
+
+    const handleMouseMove = (e) => {
+      mouse.current.x = e.clientX;
+      mouse.current.y = e.clientY;
+    };
+
+    window.addEventListener("resize", setSize);
+    window.addEventListener("mousemove", handleMouseMove);
+    setSize();
+    rafRef.current = requestAnimationFrame(tick);
+
+    return () => {
+      window.removeEventListener("resize", setSize);
+      window.removeEventListener("mousemove", handleMouseMove);
+      cancelAnimationFrame(rafRef.current);
+    };
+  }, [noise, colors.line]);
 
   return (
-    <div className="fixed inset-0 -z-10 bg-[var(--bg-dark)]">
-      {/* Subtle Grid Overlay */}
-      <div 
-        className="absolute inset-0"
+    <div
+      ref={containerRef}
+      className="fixed inset-0 -z-10 overflow-hidden"
+      style={{
+        backgroundColor: colors.bg,
+        "--mx": "-100px",
+        "--my": "-100px"
+      }}
+    >
+      <div
+        className="absolute w-2 h-2 rounded-full pointer-events-none z-10"
         style={{
-          backgroundImage: `linear-gradient(${isDark ? 'rgba(0, 242, 255, 0.03)' : 'rgba(0, 136, 255, 0.05)'} 1px, transparent 1px), 
-                          linear-gradient(90deg, ${isDark ? 'rgba(0, 242, 255, 0.03)' : 'rgba(0, 136, 255, 0.05)'} 1px, transparent 1px)`,
-          backgroundSize: '40px 40px'
-        }}
-      ></div>
-      
-      {/* Particles */}
-      <Particles
-        id="tsparticles"
-        init={particlesInit}
-        options={{
-          background: { color: { value: "transparent" } },
-          fpsLimit: 120,
-          interactivity: {
-            events: {
-              onHover: { enable: true, mode: "grab" },
-              resize: true,
-            },
-            modes: {
-              grab: { distance: 140, links: { opacity: 0.5 } },
-            },
-          },
-          particles: {
-            color: { value: themeColor },
-            links: {
-              color: themeColor,
-              distance: 150,
-              enable: true,
-              opacity: isDark ? 0.1 : 0.2,
-              width: 1,
-            },
-            move: {
-              direction: "none",
-              enable: true,
-              outModes: { default: "bounce" },
-              random: false,
-              speed: 1,
-              straight: false,
-            },
-            number: { density: { enable: true, area: 800 }, value: 40 },
-            opacity: { value: 0.2 },
-            shape: { type: "circle" },
-            size: { value: { min: 1, max: 3 } },
-          },
-          detectRetina: true,
+          backgroundColor: colors.dot,
+          transform: "translate3d(calc(var(--mx) - 50%), calc(var(--my) - 50%), 0)",
+          willChange: "transform"
         }}
       />
-      
-      {/* Soft Glows */}
-      <div className={`absolute top-0 -left-1/4 w-1/2 h-1/2 ${isDark ? 'bg-blue-500/10' : 'bg-blue-400/5'} blur-[120px] rounded-full`}></div>
-      <div className={`absolute bottom-0 -right-1/4 w-1/2 h-1/2 ${isDark ? 'bg-purple-500/10' : 'bg-purple-400/5'} blur-[120px] rounded-full`}></div>
+      <svg ref={svgRef} className="w-full h-full block" />
     </div>
   );
 };

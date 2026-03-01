@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion';
 import { ChevronRight, MousePointer2 } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import Background from './Background';
 
-const Hero = () => {
+const Hero = ({ isDark }) => {
   const [showButtons, setShowButtons] = useState(false);
 
   useEffect(() => {
@@ -15,7 +16,8 @@ const Hero = () => {
 
   return (
     <section id="home" className="min-h-screen flex flex-col justify-center pt-20 px-6 relative overflow-hidden">
-      <div className="max-w-4xl">
+      <Background isDark={isDark} showAccent={true} lineOpacity={0.15} />
+      <div className="max-w-4xl relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

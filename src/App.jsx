@@ -24,14 +24,13 @@ function App() {
   return (
     <div className={`relative min-h-screen transition-colors duration-500 ${isDark ? '' : 'light'}`}>
       <div className="text-[var(--text-main)] min-h-screen">
-        <Background isDark={isDark} />
         <Navbar isDark={isDark} toggleTheme={toggleTheme} />
         <main className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <Hero />
-          <About />
-          <Skills />
-          <Projects />
-          <Contact />
+          <Hero isDark={isDark} />
+          <About isDark={isDark} />
+          <Skills isDark={isDark} />
+          <Projects isDark={isDark} />
+          <Contact isDark={isDark} />
         </main>
         <footer className="py-8 text-center text-sm text-[var(--text-dim)] relative z-10">
           &copy; {new Date().getFullYear()} Ilyas Ait Oulhiane. Built with React & Framer Motion.

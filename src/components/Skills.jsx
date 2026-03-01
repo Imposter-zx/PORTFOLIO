@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import Background from './Background';
 
-const Skills = () => {
+const Skills = ({ isDark }) => {
   const skillCategories = [
     {
       title: "Programming",
@@ -30,40 +31,43 @@ const Skills = () => {
   ];
 
   return (
-    <section id="skills" className="py-32 px-6">
-      <div className="mb-20">
-        <h2 className="text-[var(--fs-4xl)] font-black mb-4 tracking-tighter uppercase text-right leading-none">
-          Technical<br />
-          <span className="text-[var(--accent)]">Stack.</span>
-        </h2>
-        <p className="text-[var(--text-dim)] text-[var(--fs-base)] font-light text-right">The tools I use to turn logic into art.</p>
-      </div>
+    <section id="skills" className="py-32 px-6 relative overflow-hidden">
+      <Background isDark={isDark} showAccent={true} lineOpacity={0.1} />
+      <div className="relative z-10">
+        <div className="mb-20">
+          <h2 className="text-[var(--fs-4xl)] font-black mb-4 tracking-tighter uppercase text-right leading-none">
+            Technical<br />
+            <span className="text-[var(--accent)]">Stack.</span>
+          </h2>
+          <p className="text-[var(--text-dim)] text-[var(--fs-base)] font-light text-right">The tools I use to turn logic into art.</p>
+        </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-        {skillCategories.map((group, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.1 }}
-            className="p-10 border border-white/5 rounded-lg hover:border-[var(--accent)] transition-all duration-500 group"
-          >
-            <h3 className="text-xs uppercase font-bold tracking-[0.3em] mb-8 text-[var(--text-dim)] group-hover:text-[var(--accent)] transition-colors">
-              {group.title}
-            </h3>
-            <div className="flex flex-wrap gap-4">
-              {group.skills.map((skill) => (
-                <span
-                  key={skill}
-                  className="text-sm font-light text-[var(--text-dim)] group-hover:text-[var(--text-main)] transition-colors border-b border-white/5 pb-1"
-                >
-                  {skill}
-                </span>
-              ))}
-            </div>
-          </motion.div>
-        ))}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {skillCategories.map((group, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="p-10 border border-white/5 rounded-lg hover:border-[var(--accent)] transition-all duration-500 group"
+            >
+              <h3 className="text-xs uppercase font-bold tracking-[0.3em] mb-8 text-[var(--text-dim)] group-hover:text-[var(--accent)] transition-colors">
+                {group.title}
+              </h3>
+              <div className="flex flex-wrap gap-4">
+                {group.skills.map((skill) => (
+                  <span
+                    key={skill}
+                    className="text-sm font-light text-[var(--text-dim)] group-hover:text-[var(--text-main)] transition-colors border-b border-white/5 pb-1"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );

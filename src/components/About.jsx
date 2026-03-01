@@ -1,8 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Code, Palette, Zap, Cpu } from 'lucide-react';
+import Background from './Background';
 
-const About = () => {
+const About = ({ isDark }) => {
   const cards = [
     {
       icon: <Code className="w-8 h-8 text-[var(--accent)]" />,
@@ -27,8 +28,9 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="py-32 px-6 border-t border-white/5">
-      <div className="flex flex-col lg:flex-row gap-20 items-center">
+    <section id="about" className="py-32 px-6 border-t border-white/5 relative overflow-hidden">
+      <Background isDark={isDark} showAccent={false} lineOpacity={0.05} />
+      <div className="flex flex-col lg:flex-row gap-20 items-center relative z-10">
         <div className="lg:w-1/2">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

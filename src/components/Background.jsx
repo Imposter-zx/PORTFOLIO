@@ -59,7 +59,7 @@ class Noise {
   }
 }
 
-const Background = ({ isDark }) => {
+const Background = ({ isDark, showAccent = false, lineOpacity = 0.2 }) => {
   const containerRef = useRef(null);
   const svgRef = useRef(null);
   const mouse = useRef({ x: -1000, y: -1000, sx: -1000, sy: -1000, lx: 0, ly: 0, v: 0, vs: 0, a: 0 });
@@ -68,14 +68,14 @@ const Background = ({ isDark }) => {
   const rafRef = useRef(null);
 
   const colors = {
-    bg: "#f40c3f",
-    line: "#160000",
-    dot: "#160000"
+    bg: showAccent ? "#f40c3f" : "transparent",
+    line: isDark ? "#160000" : "#000000",
+    dot: isDark ? "#160000" : "#000000"
   };
 
   useEffect(() => {
     const setSize = () => {
-      if (!svgRef.current) return;
+      if (!svgRef.current || !containerRef.current) return;
       const { width, height } = containerRef.current.getBoundingClientRect();
       svgRef.current.setAttribute("viewBox", `0 0 ${width} ${height}`);
       setLines(width, height);
@@ -106,6 +106,7 @@ const Background = ({ isDark }) => {
     };
 
     const tick = (time) => {
+      if (!mouse.current) return;
       mouse.current.sx += (mouse.current.x - mouse.current.sx) * 0.1;
       mouse.current.sy += (mouse.current.y - mouse.current.sy) * 0.1;
 
@@ -188,14 +189,16 @@ const Background = ({ isDark }) => {
         path.setAttribute("fill", "none");
         path.setAttribute("stroke", colors.line);
         path.setAttribute("stroke-width", "1");
-        path.setAttribute("opacity", "0.2");
+        path.setAttribute("opacity", lineOpacity.toString());
         svgRef.current.appendChild(path);
       });
     };
 
     const handleMouseMove = (e) => {
-      mouse.current.x = e.clientX;
-      mouse.current.y = e.clientY;
+      if (!containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      mouse.current.x = e.clientX - rect.left;
+      mouse.current.y = e.clientY - rect.top;
     };
 
     window.addEventListener("resize", setSize);
@@ -208,12 +211,12 @@ const Background = ({ isDark }) => {
       window.removeEventListener("mousemove", handleMouseMove);
       cancelAnimationFrame(rafRef.current);
     };
-  }, [noise, colors.line]);
+  }, [noise, colors.line, lineOpacity]);
 
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 -z-10 overflow-hidden"
+      className="absolute inset-0 -z-1 overflow-hidden"
       style={{
         backgroundColor: colors.bg,
         "--mx": "-100px",

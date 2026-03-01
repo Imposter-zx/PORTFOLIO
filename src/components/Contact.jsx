@@ -1,11 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Github } from 'lucide-react';
+import Background from './Background';
 
-const Contact = () => {
+const Contact = ({ isDark }) => {
   return (
-    <section id="contact" className="py-32 px-6 border-t border-white/5">
-      <div className="max-w-4xl mx-auto text-center">
+    <section id="contact" className="py-32 px-6 border-t border-white/5 relative overflow-hidden">
+      <Background isDark={isDark} showAccent={false} lineOpacity={0.05} />
+      <div className="max-w-4xl mx-auto text-center relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}

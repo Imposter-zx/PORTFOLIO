@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, Github, Star, Folder, AlertCircle } from 'lucide-react';
-import Background from './Background';
+import { ExternalLink, Github, AlertCircle } from 'lucide-react';
 
-const Projects = ({ isDark }) => {
+const Projects = () => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -21,7 +20,7 @@ const Projects = ({ isDark }) => {
           'Java-Client-Server-Application',
           'AegisScan-OpenCore',
           'Dim',
-          'PORTFOLIO'
+          'PORTFOLIO',
         ];
 
         const filtered = data
@@ -39,92 +38,137 @@ const Projects = ({ isDark }) => {
   }, []);
 
   const projectDescriptions = {
-    'Car-Rental': 'An end-to-end vehicle booking ecosystem focused on seamless user flow and real-time availability.',
-    'MediLink': 'A healthcare connectivity platform bridging the gap between patients and practitioners through secure data handling.',
-    'AegisScan-OpenCore': 'A high-performance scanning engine for OpenCore configurations, optimizing system stability and security.',
-    'Dim': 'A minimalist design language exploration focused on light, shadow, and essentialism.',
-    'PORTFOLIO': 'A professional, high-performance portfolio built with React, Framer Motion, and a focus on editorial typography.',
-    'Java-Client-Server-Application': 'A robust networked application demonstrating low-level socket programming and multithreaded architecture.'
+    'Car-Rental': 'End-to-end vehicle booking ecosystem focused on seamless user flow and real-time availability.',
+    'MediLink': 'Healthcare connectivity platform bridging patients and practitioners through secure data handling.',
+    'AegisScan-OpenCore': 'High-performance scanning engine for OpenCore configurations, optimizing system stability and security.',
+    'Dim': 'Minimalist design language exploration focused on light, shadow, and essentialism.',
+    'PORTFOLIO': 'This portfolio — high-performance, built with React and Framer Motion, focused on editorial detail.',
+    'Java-Client-Server-Application': 'Networked application demonstrating low-level socket programming and multithreaded architecture.',
+  };
+
+  const containerVariants = {
+    hidden: {},
+    visible: { transition: { staggerChildren: 0.06 } },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 24 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
   };
 
   return (
-    <section id="projects" className="py-32 px-6 relative overflow-hidden">
-      <Background isDark={isDark} showAccent={false} lineOpacity={0.05} />
-      <div className="relative z-10">
-        <div className="mb-20">
-          <h2 className="text-[var(--fs-4xl)] font-black mb-4 tracking-tighter uppercase leading-none">
-            Selected<br />
-            <span className="text-[var(--accent)]">Work.</span>
-          </h2>
-          <p className="text-[var(--text-dim)] text-[var(--fs-base)] font-light">A curation of projects defining my technical range.</p>
-        </div>
+    <section id="projects" className="py-40 px-6 bg-[var(--bg-dark)]">
+      <hr className="section-rule" />
+      <div className="max-w-6xl mx-auto">
 
+        {/* Header */}
+        <motion.div
+          className="pt-24 mb-24"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={containerVariants}
+        >
+          <motion.span
+            variants={itemVariants}
+            className="text-[var(--fs-xs)] font-mono uppercase tracking-[0.4em] text-[var(--red-accent)] mb-6 block"
+          >
+            04 — Work
+          </motion.span>
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+            <motion.h2
+              variants={itemVariants}
+              className="text-[var(--fs-4xl)] font-black leading-[0.9] tracking-tighter uppercase"
+            >
+              Selected<br />
+              <span className="text-[var(--red-accent)]">Projects.</span>
+            </motion.h2>
+            <motion.p
+              variants={itemVariants}
+              className="text-[var(--text-dim)] text-[var(--fs-base)] font-light max-w-xs lg:text-right leading-relaxed"
+            >
+              A curation defining my technical range.
+            </motion.p>
+          </div>
+        </motion.div>
+
+        {/* Project List */}
         {loading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            {[1, 2].map(i => (
-              <div key={i} className="h-96 bg-white/[0.02] animate-pulse rounded-lg"></div>
+          <div className="space-y-px">
+            {[1, 2, 3].map(i => (
+              <div key={i} className="h-32 bg-white/[0.02] animate-pulse rounded" />
             ))}
           </div>
         ) : error ? (
-          <div className=" glass p-12 rounded-lg flex flex-col items-center justify-center text-center">
-            <AlertCircle className="w-12 h-12 text-red-500 mb-4" />
-            <h3 className="text-xl font-black uppercase mb-2 text-[var(--text-main)]">Sync Failed</h3>
-            <p className="text-[var(--text-dim)]">GitHub API unreachable. Please check my profile manually.</p>
-            <a href="https://github.com/Imposter-zx" target="_blank" className="mt-8 neon-btn-blue">Go to GitHub</a>
+          <div className="glass p-16 rounded flex flex-col items-center justify-center text-center">
+            <AlertCircle className="w-10 h-10 text-[var(--red-accent)] mb-5" />
+            <h3 className="text-xl font-black uppercase mb-2">Sync Failed</h3>
+            <p className="text-[var(--text-dim)] mb-8">GitHub API unreachable. Check my profile directly.</p>
+            <a href="https://github.com/Imposter-zx" target="_blank" className="btn-outline">
+              Go to GitHub
+            </a>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={containerVariants}
+          >
             <AnimatePresence>
               {projects.map((repo, i) => (
                 <motion.div
                   key={repo.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  whileHover={{ scale: 1.01, transition: { duration: 0.2 } }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1, duration: 0.8 }}
-                  className="group relative flex flex-col border-b border-white/5 pb-12 last:border-0 hover:shadow-[0_20px_50px_rgba(59,130,246,0.05)] transition-shadow p-4 rounded-xl"
+                  variants={itemVariants}
+                  className="group relative flex flex-col sm:flex-row sm:items-start gap-8 py-12 border-b border-white/5 last:border-0 pl-0 hover:pl-5 transition-all duration-500"
                 >
-                  <div className="flex justify-between items-start mb-8">
-                    <span className="text-[var(--fs-xs)] font-mono opacity-30 group-hover:opacity-100 transition-opacity uppercase tracking-widest">PROCESS_0{i + 1}</span>
-                    <div className="flex space-x-4">
-                      <a href={repo.html_url} target="_blank" className="text-[var(--text-dim)] hover:text-[var(--text-main)] transition-colors"><Github className="w-5 h-5" /></a>
-                      {repo.homepage && <a href={repo.homepage} target="_blank" className="text-[var(--text-dim)] hover:text-[var(--accent)] transition-colors"><ExternalLink className="w-5 h-5" /></a>}
+                  {/* Left-border accent on hover */}
+                  <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-[var(--red-accent)] opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full" />
+
+                  {/* Index */}
+                  <span className="text-[var(--fs-xs)] font-mono text-[var(--text-dim)] opacity-30 group-hover:opacity-100 group-hover:text-[var(--red-accent)] transition-all duration-300 pt-1 shrink-0 w-14">
+                    {String(i + 1).padStart(2, '0')}&nbsp;/&nbsp;{String(projects.length).padStart(2, '0')}
+                  </span>
+
+                  {/* Content */}
+                  <div className="flex-1">
+                    <div className="flex items-start justify-between gap-4 mb-4">
+                      <h3 className="text-[var(--fs-2xl)] font-black tracking-tighter uppercase group-hover:text-[var(--red-accent)] transition-colors duration-300">
+                        {repo.name.replace(/-/g, ' ')}
+                      </h3>
+                      <div className="flex items-center gap-4 mt-1 shrink-0 opacity-40 group-hover:opacity-100 transition-opacity">
+                        <a href={repo.html_url} target="_blank" className="hover:text-[var(--text-main)] transition-colors text-[var(--text-dim)]">
+                          <Github className="w-5 h-5" />
+                        </a>
+                        {repo.homepage && (
+                          <a href={repo.homepage} target="_blank" className="hover:text-[var(--red-accent)] transition-colors text-[var(--text-dim)]">
+                            <ExternalLink className="w-5 h-5" />
+                          </a>
+                        )}
+                      </div>
+                    </div>
+
+                    <p className="text-[var(--text-dim)] text-[var(--fs-base)] font-light leading-relaxed mb-5 max-w-2xl">
+                      {projectDescriptions[repo.name] || repo.description || 'Building robust architecture through iterative experimentation.'}
+                    </p>
+
+                    <div className="flex flex-wrap items-center gap-5">
+                      {repo.language && (
+                        <span className="text-[var(--fs-xs)] uppercase font-bold tracking-[0.2em] text-[var(--red-accent)]">
+                          {repo.language}
+                        </span>
+                      )}
+                      {(repo.topics || []).slice(0, 3).map(topic => (
+                        <span key={topic} className="text-[var(--fs-xs)] uppercase tracking-[0.2em] text-[var(--text-dim)] opacity-40">
+                          {topic}
+                        </span>
+                      ))}
                     </div>
                   </div>
-
-                  <h3 className="text-[var(--fs-2xl)] font-black mb-4 tracking-tighter uppercase group-hover:text-[var(--accent)] transition-colors underline-offset-8 decoration-1 group-hover:underline">
-                    {repo.name.replace(/-/g, ' ')}
-                  </h3>
-
-                  <p className="text-[var(--text-dim)] text-[var(--fs-base)] font-light mb-8 max-w-xl leading-relaxed">
-                    {projectDescriptions[repo.name] || repo.description || "Building robust architecture through iterative experimentation and digital intent."}
-                  </p>
-
-                  <div className="flex flex-wrap gap-4 mt-auto">
-                    {repo.language && (
-                      <span className="text-[var(--fs-xs)] uppercase font-bold tracking-[0.2em] text-[var(--accent)]">
-                        {repo.language}
-                      </span>
-                    )}
-                    {(repo.topics || []).slice(0, 3).map(topic => (
-                      <span key={topic} className="text-[var(--fs-xs)] uppercase font-bold tracking-[0.3em] text-[var(--text-dim)] opacity-40">
-                        {topic}
-                      </span>
-                    ))}
-                  </div>
-
-                  <a
-                    href={repo.html_url}
-                    target="_blank"
-                    className="mt-8 text-[var(--fs-xs)] uppercase font-black tracking-widest text-[var(--accent)] opacity-0 group-hover:opacity-100 transition-all transform translate-y-2 group-hover:translate-y-0"
-                  >
-                    View on GitHub →
-                  </a>
                 </motion.div>
               ))}
             </AnimatePresence>
-          </div>
+          </motion.div>
         )}
       </div>
     </section>

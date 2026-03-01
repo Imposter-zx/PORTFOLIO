@@ -1,84 +1,109 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Code, Palette, Zap, Cpu } from 'lucide-react';
-import Background from './Background';
 
-const About = ({ isDark }) => {
-  const cards = [
+const About = () => {
+  const traits = [
     {
-      icon: <Code className="w-8 h-8 text-[var(--accent)]" />,
-      title: "Clean Code",
-      text: "Writing maintainable, scalable and efficient code is my priority. I love architectural challenges."
+      label: "Architecture",
+      text: "Writing maintainable, scalable code is my priority. I love the challenge of systems that grow gracefully.",
     },
     {
-      icon: <Palette className="w-8 h-8 text-[var(--accent)]" />,
-      title: "UI/UX Mastery",
-      text: "Blending technical logic with aesthetic design to create intuitive user journeys."
+      label: "Design",
+      text: "Blending technical logic with aesthetic precision to create interfaces people actually feel.",
     },
     {
-      icon: <Zap className="w-8 h-8 text-[var(--accent)]" />,
-      title: "Fast Learner",
-      text: "Passionate about exploring new technologies and staying ahead of industry trends."
+      label: "Velocity",
+      text: "Fast learner. Passionate about staying ahead of the curve and shipping quality quickly.",
     },
     {
-      icon: <Cpu className="w-8 h-8 text-[var(--accent)]" />,
-      title: "Systems Thinker",
-      text: "Understanding how components interact within complex systems to build robust solutions."
-    }
+      label: "Systems",
+      text: "Understanding how components interact across complex systems to build robust, lasting solutions.",
+    },
   ];
 
+  const containerVariants = {
+    hidden: {},
+    visible: { transition: { staggerChildren: 0.08 } },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 16 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
+  };
+
   return (
-    <section id="about" className="py-32 px-6 border-t border-white/5 relative overflow-hidden">
-      <Background isDark={isDark} showAccent={false} lineOpacity={0.05} />
-      <div className="flex flex-col lg:flex-row gap-20 items-center relative z-10">
-        <div className="lg:w-1/2">
+    <section id="about" className="py-40 px-6 bg-[var(--bg-dark)]">
+      <hr className="section-rule mb-40" />
+      <div className="max-w-6xl mx-auto">
+        <div className="flex flex-col lg:flex-row gap-24 lg:gap-32">
+
+          {/* Left — Identity */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            className="lg:w-5/12"
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+            variants={containerVariants}
           >
-            <h2 className="text-[var(--fs-4xl)] font-black mb-10 leading-none tracking-tighter uppercase">
+            <motion.span
+              variants={itemVariants}
+              className="text-[var(--fs-xs)] font-mono uppercase tracking-[0.4em] text-[var(--red-accent)] mb-6 block"
+            >
+              02 — About
+            </motion.span>
+
+            <motion.h2
+              variants={itemVariants}
+              className="text-[var(--fs-4xl)] font-black leading-[0.9] tracking-tighter uppercase mb-10"
+            >
               Expressive<br />
-              <span className="text-[var(--accent)]">Logic.</span>
-            </h2>
-            <div className="space-y-8 text-[var(--text-dim)] text-[var(--fs-base)] leading-relaxed font-light">
+              <span className="text-[var(--red-accent)]">Logic.</span>
+            </motion.h2>
+
+            <motion.div variants={itemVariants} className="space-y-6 text-[var(--text-dim)] text-[var(--fs-base)] leading-relaxed font-light">
               <p>
-                I'm <span className="text-[var(--text-main)] font-semibold">Ilyas Ait Oulhiane</span>.
-                A computer science student at IFIAG who found that code is more than just instructions — it's a medium for creation.
+                I'm <span className="text-[var(--text-main)] font-semibold">Ilyas Ait Oulhiane</span> — a computer science student at IFIAG who found that code is more than instructions.
+                It's a medium for creation.
               </p>
               <p>
-                I don't just "build websites." I craft digital environments where technical precision
-                meets emotional design. My focus is on the intersection of clean architecture and
+                I don't just build websites. I craft digital environments where technical precision
+                meets emotional design — at the intersection of clean architecture and
                 unforgettable interfaces.
               </p>
-              <div className="pt-8 border-t border-white/5">
-                <p className="text-sm uppercase tracking-widest font-bold text-[var(--accent)] mb-4">The Goal</p>
-                <p className="text-[var(--text-main)] italic">
-                  Currently seeking an internship to merge my creative drive with professional challenges.
-                </p>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-
-        <div className="lg:w-1/2 grid grid-cols-1 gap-4">
-          {cards.map((card, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.5 }}
-              className="group flex items-start gap-6 p-8 rounded-lg border border-transparent hover:border-white/5 hover:bg-white/[0.02] transition-all"
-            >
-              <div className="mt-1 opacity-50 group-hover:opacity-100 transition-opacity">{card.icon}</div>
-              <div>
-                <h3 className="text-lg font-bold mb-1 uppercase tracking-wider">{card.title}</h3>
-                <p className="text-[var(--text-dim)] text-sm font-light max-w-sm">{card.text}</p>
-              </div>
             </motion.div>
-          ))}
+
+            <motion.div variants={itemVariants} className="mt-10 pt-8 border-t border-white/5">
+              <p className="text-[var(--fs-xs)] uppercase tracking-widest font-bold text-[var(--red-accent)] mb-3">Current Goal</p>
+              <p className="text-[var(--text-dim)] font-light italic text-[var(--fs-base)] leading-relaxed">
+                Seeking an internship where creative drive meets professional impact.
+              </p>
+            </motion.div>
+          </motion.div>
+
+          {/* Right — Traits */}
+          <motion.div
+            className="lg:w-7/12 grid grid-cols-1 sm:grid-cols-2 gap-0"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={containerVariants}
+          >
+            {traits.map((trait, i) => (
+              <motion.div
+                key={i}
+                variants={itemVariants}
+                className="group p-8 border-t border-l border-white/5 hover:bg-white/[0.025] transition-colors duration-500"
+              >
+                <p className="text-[var(--fs-xs)] uppercase tracking-[0.3em] font-bold text-[var(--red-accent)] mb-4 opacity-70 group-hover:opacity-100 transition-opacity">
+                  {trait.label}
+                </p>
+                <p className="text-[var(--text-dim)] text-[var(--fs-sm)] font-light leading-relaxed">
+                  {trait.text}
+                </p>
+              </motion.div>
+            ))}
+          </motion.div>
+
         </div>
       </div>
     </section>

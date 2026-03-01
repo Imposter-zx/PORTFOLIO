@@ -3,22 +3,28 @@
 @config "../tailwind.config.js";
 
 :root {
-  --bg-dark: #070707;
-  --bg-card: rgba(18, 18, 18, 0.4);
-  --neon-blue: #00f2ff;
-  /* Restored original cyan for futuristic feel */
-  --accent: var(--neon-blue);
-  --text-main: #f5f5f5;
-  --text-dim: #a1a1aa;
-  /* Updated for better contrast (Zinc-400) */
-  --glass-border: rgba(255, 255, 255, 0.05);
-  --selection: rgba(59, 130, 246, 0.2);
+  /* Core Palette */
+  --bg-dark: #0a0a0a;
+  --bg-card: rgba(18, 18, 18, 0.6);
+  --red-accent: #f40c3f;
+  --cyan-accent: #00f2ff;
+  --accent: var(--cyan-accent);
+
+  /* Text */
+  --text-main: #f5f5f0;
+  --text-dim: #71717a;
+  --text-on-red: #fff0f0;
+
+  /* Borders & Glass */
+  --glass-border: rgba(255, 255, 255, 0.06);
+
+  /* Spacing */
   --edge-spacing: clamp(1.5rem, 5vw, 4rem);
 
   /* Fluid Typography Scale */
-  --fs-xs: clamp(0.7rem, 0.6rem + 0.5vw, 0.875rem);
-  --fs-sm: clamp(0.8rem, 0.7rem + 0.5vw, 1rem);
-  --fs-base: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
+  --fs-xs: clamp(0.7rem, 0.6rem + 0.5vw, 0.8rem);
+  --fs-sm: clamp(0.8rem, 0.7rem + 0.5vw, 0.95rem);
+  --fs-base: clamp(1rem, 0.9rem + 0.4vw, 1.1rem);
   --fs-lg: clamp(1.125rem, 1rem + 0.6vw, 1.25rem);
   --fs-xl: clamp(1.25rem, 1.1rem + 0.8vw, 1.5rem);
   --fs-2xl: clamp(1.5rem, 1.3rem + 1vw, 2rem);
@@ -28,19 +34,20 @@
 }
 
 .light {
-  --bg-dark: #fafafa;
-  --bg-card: rgba(255, 255, 255, 0.5);
-  --neon-blue: #0066ff;
-  --accent: var(--neon-blue);
+  --bg-dark: #f8f8f6;
+  --bg-card: rgba(255, 255, 255, 0.6);
+  --cyan-accent: #0055ff;
+  --accent: var(--cyan-accent);
   --text-main: #111111;
   --text-dim: #71717a;
-  /* Updated for light mode contrast */
-  --glass-border: rgba(0, 0, 0, 0.05);
-  --selection: rgba(0, 102, 255, 0.1);
+  --glass-border: rgba(0, 0, 0, 0.06);
 }
 
 @layer base {
-  * {
+
+  *,
+  *::before,
+  *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -53,6 +60,7 @@ body {
   font-family: "Inter", sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1,
@@ -64,54 +72,95 @@ h6 {
   font-family: "Outfit", sans-serif;
 }
 
-/* Glassmorphism Utility */
+/* ─── Glassmorphism ────────────────────────────── */
 .glass {
   background: var(--bg-card);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--glass-border);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
 }
 
-.light .glass {
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
+/* ─── Dividers ─────────────────────────────────── */
+.section-rule {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  margin: 0;
 }
 
-.glass-hover:hover {
-  background: rgba(20, 20, 20, 0.8);
-  border-color: var(--neon-blue);
-  box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
-  transition: all 0.3s ease;
-}
+/* ─── Buttons ──────────────────────────────────── */
 
-/* Neon Text & Background */
-.neon-text-blue {
-  color: var(--accent);
-}
-
-.neon-btn-blue {
+/* Primary: outlined cyan (interactive, calm sections) */
+.btn-outline {
+  display: inline-block;
   background: transparent;
   border: 1px solid var(--accent);
   color: var(--accent);
-  padding: 14px 32px;
-  border-radius: 4px;
+  padding: 14px 36px;
+  border-radius: 3px;
   cursor: pointer;
-  font-weight: 600;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  font-weight: 700;
+  font-size: var(--fs-xs);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  text-decoration: none;
+  font-family: "Inter", sans-serif;
+}
+
+.btn-outline:hover {
+  background: var(--accent);
+  color: var(--bg-dark);
+  box-shadow: 0 0 24px rgba(0, 242, 255, 0.25);
+}
+
+/* Primary: red fill (on red/accent sections) */
+.btn-primary {
+  display: inline-block;
+  background: var(--bg-dark);
+  border: 1px solid var(--bg-dark);
+  color: var(--text-main);
+  padding: 14px 36px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  transition: background 0.3s ease, color 0.3s ease;
+  text-decoration: none;
+  font-family: "Inter", sans-serif;
+}
+
+.btn-primary:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+/* Legacy alias – keeps old references working */
+.neon-btn-blue {
+  display: inline-block;
+  background: transparent;
+  border: 1px solid var(--red-accent);
+  color: var(--text-main);
+  padding: 14px 36px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  transition: background 0.3s ease, color 0.3s ease;
+  text-decoration: none;
+  font-family: "Inter", sans-serif;
 }
 
 .neon-btn-blue:hover {
-  background: var(--neon-blue);
-  color: var(--bg-dark);
-  box-shadow: 0 0 20px var(--neon-blue);
+  background: var(--red-accent);
+  color: #fff;
 }
 
-/* Scrollbar */
+/* ─── Scrollbar ─────────────────────────────────── */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 4px;
 }
 
 ::-webkit-scrollbar-track {
@@ -119,26 +168,24 @@ h6 {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #333;
+  background: #2a2a2a;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--neon-blue);
+  background: var(--red-accent);
 }
 
-/* Custom Animations */
+/* ─── Animations ────────────────────────────────── */
 @keyframes float {
-  0% {
+
+  0%,
+  100% {
     transform: translateY(0px);
   }
 
   50% {
     transform: translateY(-10px);
-  }
-
-  100% {
-    transform: translateY(0px);
   }
 }
 

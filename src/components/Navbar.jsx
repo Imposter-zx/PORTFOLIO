@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-<<<<<<< HEAD
-import { Github, Menu, X, Sun, Moon } from 'lucide-react';
-=======
 import { Github, Menu, X, Terminal, Moon, Sun, Globe } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
->>>>>>> @{-1}
 
-const Navbar = ({ isDark, toggleTheme }) => {
+const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
@@ -23,30 +19,6 @@ const Navbar = ({ isDark, toggleTheme }) => {
   }, []);
 
   const navLinks = [
-<<<<<<< HEAD
-    { name: 'Work', href: '#projects' },
-    { name: 'About', href: '#about' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Contact', href: '#contact' },
-  ];
-
-  return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
-          ? 'py-4 bg-[rgba(10,10,10,0.95)] backdrop-blur-xl border-b border-white/5'
-          : 'py-7 bg-transparent'
-        }`}
-    >
-      <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-
-        {/* Logo */}
-        <motion.a
-          href="#home"
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="group"
-=======
     { name: t('nav.home'), href: '#home' },
     { name: t('nav.about'), href: '#about' },
     { name: t('nav.skills'), href: '#skills' },
@@ -57,60 +29,37 @@ const Navbar = ({ isDark, toggleTheme }) => {
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'py-4 bg-white/70 dark:bg-[#0f0f0f]/70 backdrop-blur-xl border-b border-gray-200 dark:border-white/5 shadow-sm dark:shadow-none' : 'py-6 bg-transparent'}`}>
       <div className="container mx-auto px-6 flex justify-between items-center">
+        {/* Logo */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="flex items-center space-x-2 cursor-pointer"
->>>>>>> @{-1}
+          className="flex items-center space-x-2 cursor-pointer group"
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
-          <span className="text-sm font-black tracking-tighter uppercase group-hover:text-[var(--red-accent)] transition-colors duration-300">
-            Ilyas
-          </span>
-          <span className="block text-[9px] font-bold uppercase tracking-[0.45em] text-[var(--text-dim)] leading-none mt-0.5">
-            Creative Dev
-          </span>
-        </motion.a>
+          <div className="w-10 h-10 bg-blue-600 dark:bg-[#00f2ff] rounded-xl flex items-center justify-center text-white dark:text-black shadow-lg shadow-blue-500/20 dark:shadow-[#00f2ff]/20">
+            <Terminal className="w-6 h-6" />
+          </div>
+          <div className="hidden sm:block">
+            <span className="text-xl font-black tracking-tighter text-gray-900 dark:text-white uppercase transition-colors">Ilyas</span>
+            <span className="block text-[8px] font-bold uppercase tracking-[0.3em] text-gray-500 dark:text-[#a0a0a0]">Creative Dev</span>
+          </div>
+        </motion.div>
 
         {/* Desktop Nav */}
-<<<<<<< HEAD
-        <div className="hidden md:flex items-center gap-10">
-=======
         <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
->>>>>>> @{-1}
           {navLinks.map((link, i) => (
             <motion.a
               key={link.name}
               href={link.href}
-              initial={{ opacity: 0, y: -8 }}
+              initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-<<<<<<< HEAD
-              transition={{ delay: 0.05 * i, duration: 0.5, ease: 'easeOut' }}
-              className="text-[11px] uppercase tracking-[0.25em] font-bold text-[var(--text-dim)] hover:text-[var(--text-main)] transition-colors duration-200"
-=======
               transition={{ delay: i * 0.1 }}
-              className="text-sm font-medium text-gray-600 dark:text-[#a0a0a0] hover:text-[#00f2ff] dark:hover:text-[#00f2ff] transition-colors"
->>>>>>> @{-1}
+              className="text-sm font-medium text-gray-600 dark:text-[#a0a0a0] hover:text-blue-600 dark:hover:text-[#00f2ff] transition-colors"
             >
               {link.name}
             </motion.a>
           ))}
 
-<<<<<<< HEAD
-          <div className="flex items-center gap-3 ml-4">
-            <motion.button
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.3 }}
-              onClick={toggleTheme}
-              className="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center hover:border-white/30 transition-colors"
-              aria-label="Toggle theme"
-            >
-              {isDark
-                ? <Sun className="w-4 h-4 text-yellow-400" />
-                : <Moon className="w-4 h-4 text-indigo-400" />}
-            </motion.button>
-
-=======
           <div className="flex items-center space-x-3 pl-4 border-l border-gray-200 dark:border-white/10 ml-4">
             {/* Language Switcher */}
             <div className="relative">
@@ -142,7 +91,7 @@ const Navbar = ({ isDark, toggleTheme }) => {
                           setLanguage(lang.code);
                           setIsLangMenuOpen(false);
                         }}
-                        className={`w-full text-left px-4 py-2 text-sm transition-colors ${language === lang.code ? 'text-[#00f2ff] bg-[#00f2ff]/5 font-medium' : 'text-gray-600 dark:text-[#a0a0a0] hover:bg-gray-50 dark:hover:bg-white/5 hover:text-gray-900 dark:hover:text-white'}`}
+                        className={`w-full text-left px-4 py-2 text-sm transition-colors ${language === lang.code ? 'text-blue-600 dark:text-[#00f2ff] bg-blue-50 dark:bg-[#00f2ff]/5 font-medium' : 'text-gray-600 dark:text-[#a0a0a0] hover:bg-gray-50 dark:hover:bg-white/5 hover:text-gray-900 dark:hover:text-white'}`}
                       >
                         {lang.label}
                       </button>
@@ -161,39 +110,18 @@ const Navbar = ({ isDark, toggleTheme }) => {
               {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
             </button>
 
-            {/* Github Link */}
->>>>>>> @{-1}
             <motion.a
               href="https://github.com/Imposter-zx"
               target="_blank"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-<<<<<<< HEAD
-              transition={{ delay: 0.35 }}
-              className="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center hover:border-[var(--red-accent)] hover:text-[var(--red-accent)] transition-all duration-300"
-              aria-label="GitHub"
-=======
-              className="w-9 h-9 bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 flex items-center justify-center rounded-full text-gray-700 dark:text-white hover:border-[#00f2ff] dark:hover:border-[#00f2ff] transition-all hover:shadow-[0_0_10px_rgba(0,242,255,0.2)]"
->>>>>>> @{-1}
+              className="w-9 h-9 bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 flex items-center justify-center rounded-full text-gray-700 dark:text-white hover:border-blue-600 dark:hover:border-[#00f2ff] transition-all hover:shadow-lg dark:hover:shadow-[0_0_10px_rgba(0,242,255,0.2)]"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
             >
               <Github className="w-4 h-4" />
             </motion.a>
           </div>
         </div>
 
-<<<<<<< HEAD
-        {/* Mobile Controls */}
-        <div className="md:hidden flex items-center gap-4">
-          <button onClick={toggleTheme} className="p-2" aria-label="Toggle theme">
-            {isDark ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-indigo-400" />}
-          </button>
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="p-2 text-[var(--text-dim)]"
-            aria-label="Toggle menu"
-          >
-            {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-=======
         {/* Mobile Toggle */}
         <div className="md:hidden flex items-center space-x-4">
           <button
@@ -207,7 +135,6 @@ const Navbar = ({ isDark, toggleTheme }) => {
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X /> : <Menu />}
->>>>>>> @{-1}
           </button>
         </div>
       </div>
@@ -219,40 +146,19 @@ const Navbar = ({ isDark, toggleTheme }) => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-<<<<<<< HEAD
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="md:hidden bg-[rgba(10,10,10,0.98)] backdrop-blur-xl border-t border-white/5 overflow-hidden"
-          >
-            <div className="px-6 py-8 flex flex-col gap-6">
-=======
             className="md:hidden bg-white/95 dark:bg-[#050505]/95 backdrop-blur-xl border-t border-gray-200 dark:border-white/5 overflow-hidden"
           >
             <div className="p-6 flex flex-col space-y-4">
->>>>>>> @{-1}
               {navLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-<<<<<<< HEAD
-                  className="text-xl font-black uppercase tracking-tighter text-[var(--text-dim)] hover:text-[var(--text-main)] transition-colors"
-=======
-                  className="text-lg font-medium text-gray-700 dark:text-[#a0a0a0] hover:text-[#00f2ff] dark:hover:text-[#00f2ff]"
->>>>>>> @{-1}
+                  className="text-lg font-medium text-gray-700 dark:text-[#a0a0a0] hover:text-blue-600 dark:hover:text-[#00f2ff]"
                 >
                   {link.name}
                 </a>
               ))}
-<<<<<<< HEAD
-              <a
-                href="https://github.com/Imposter-zx"
-                target="_blank"
-                className="flex items-center gap-3 text-[var(--text-dim)] hover:text-[var(--red-accent)] transition-colors mt-2 pt-6 border-t border-white/5"
-              >
-                <Github className="w-4 h-4" />
-                <span className="text-[11px] uppercase tracking-widest font-bold">GitHub</span>
-              </a>
-=======
 
               <div className="pt-4 mt-4 border-t border-gray-200 dark:border-white/10">
                 <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3 font-bold">Language</p>
@@ -268,14 +174,13 @@ const Navbar = ({ isDark, toggleTheme }) => {
                         setLanguage(lang.code);
                         setIsMobileMenuOpen(false);
                       }}
-                      className={`px-4 py-2 rounded-lg text-sm font-bold transition-colors ${language === lang.code ? 'bg-[#00f2ff]/10 text-[#00f2ff] border border-[#00f2ff]/30' : 'bg-gray-100 dark:bg-white/5 text-gray-600 dark:text-[#a0a0a0]'}`}
+                      className={`px-4 py-2 rounded-lg text-sm font-bold transition-colors ${language === lang.code ? 'bg-blue-600/10 dark:bg-[#00f2ff]/10 text-blue-600 dark:text-[#00f2ff] border border-blue-600/30 dark:border-[#00f2ff]/30' : 'bg-gray-100 dark:bg-white/5 text-gray-600 dark:text-[#a0a0a0]'}`}
                     >
                       {lang.label}
                     </button>
                   ))}
                 </div>
               </div>
->>>>>>> @{-1}
             </div>
           </motion.div>
         )}

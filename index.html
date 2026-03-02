@@ -1,32 +1,54 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ilyas Ait Oulhiane | Developer & Creative Designer</title>
-    <meta
-      name="description"
-      content="Portfolio of Ilyas Ait Oulhiane - Computer Science Student & Creative Designer. Specialist in modern web experiences, UI/UX and software development."
-    />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              neon: {
-                blue: "#00f2ff",
-                purple: "#7000ff",
-              },
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ilyas Ait Oulhiane | Developer & Creative Designer</title>
+  <!-- Preconnect to Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Add Cairo Font for Arabic -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Dark Mode Init Script to Prevent Flash -->
+  <script>
+    (function () {
+      try {
+        var preferredTheme = localStorage.getItem('theme');
+        if (preferredTheme === 'dark' || (!preferredTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      } catch (e) { }
+    })();
+  </script>
+  <meta name="description"
+    content="Portfolio of Ilyas Ait Oulhiane - Computer Science Student & Creative Designer. Specialist in modern web experiences, UI/UX and software development." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            neon: {
+              blue: "#00f2ff",
+              purple: "#7000ff",
             },
           },
         },
-      };
-    </script>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+      },
+    };
+  </script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+
 </html>

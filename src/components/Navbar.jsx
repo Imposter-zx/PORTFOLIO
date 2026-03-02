@@ -1,10 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+<<<<<<< HEAD
 import { Github, Menu, X, Sun, Moon } from 'lucide-react';
+=======
+import { Github, Menu, X, Terminal, Moon, Sun, Globe } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
+import { useLanguage } from '../context/LanguageContext';
+>>>>>>> @{-1}
 
 const Navbar = ({ isDark, toggleTheme }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
+
+  const { theme, toggleTheme } = useTheme();
+  const { language, setLanguage, t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -13,6 +23,7 @@ const Navbar = ({ isDark, toggleTheme }) => {
   }, []);
 
   const navLinks = [
+<<<<<<< HEAD
     { name: 'Work', href: '#projects' },
     { name: 'About', href: '#about' },
     { name: 'Skills', href: '#skills' },
@@ -35,6 +46,22 @@ const Navbar = ({ isDark, toggleTheme }) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="group"
+=======
+    { name: t('nav.home'), href: '#home' },
+    { name: t('nav.about'), href: '#about' },
+    { name: t('nav.skills'), href: '#skills' },
+    { name: t('nav.projects'), href: '#projects' },
+    { name: t('nav.contact'), href: '#contact' },
+  ];
+
+  return (
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'py-4 bg-white/70 dark:bg-[#0f0f0f]/70 backdrop-blur-xl border-b border-gray-200 dark:border-white/5 shadow-sm dark:shadow-none' : 'py-6 bg-transparent'}`}>
+      <div className="container mx-auto px-6 flex justify-between items-center">
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          className="flex items-center space-x-2 cursor-pointer"
+>>>>>>> @{-1}
         >
           <span className="text-sm font-black tracking-tighter uppercase group-hover:text-[var(--red-accent)] transition-colors duration-300">
             Ilyas
@@ -45,20 +72,30 @@ const Navbar = ({ isDark, toggleTheme }) => {
         </motion.a>
 
         {/* Desktop Nav */}
+<<<<<<< HEAD
         <div className="hidden md:flex items-center gap-10">
+=======
+        <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
+>>>>>>> @{-1}
           {navLinks.map((link, i) => (
             <motion.a
               key={link.name}
               href={link.href}
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
+<<<<<<< HEAD
               transition={{ delay: 0.05 * i, duration: 0.5, ease: 'easeOut' }}
               className="text-[11px] uppercase tracking-[0.25em] font-bold text-[var(--text-dim)] hover:text-[var(--text-main)] transition-colors duration-200"
+=======
+              transition={{ delay: i * 0.1 }}
+              className="text-sm font-medium text-gray-600 dark:text-[#a0a0a0] hover:text-[#00f2ff] dark:hover:text-[#00f2ff] transition-colors"
+>>>>>>> @{-1}
             >
               {link.name}
             </motion.a>
           ))}
 
+<<<<<<< HEAD
           <div className="flex items-center gap-3 ml-4">
             <motion.button
               initial={{ opacity: 0, scale: 0.8 }}
@@ -73,20 +110,78 @@ const Navbar = ({ isDark, toggleTheme }) => {
                 : <Moon className="w-4 h-4 text-indigo-400" />}
             </motion.button>
 
+=======
+          <div className="flex items-center space-x-3 pl-4 border-l border-gray-200 dark:border-white/10 ml-4">
+            {/* Language Switcher */}
+            <div className="relative">
+              <button
+                onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
+                className="flex items-center space-x-1 text-gray-600 dark:text-[#a0a0a0] hover:text-gray-900 dark:hover:text-white transition-colors p-2"
+                aria-label="Change Language"
+              >
+                <Globe className="w-5 h-5" />
+                <span className="text-xs font-bold uppercase">{language}</span>
+              </button>
+
+              <AnimatePresence>
+                {isLangMenuOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    className="absolute top-full right-0 mt-2 w-32 bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-white/10 rounded-xl shadow-xl overflow-hidden py-1"
+                  >
+                    {[
+                      { code: 'en', label: 'English' },
+                      { code: 'fr', label: 'Français' },
+                      { code: 'ar', label: 'العربية' }
+                    ].map((lang) => (
+                      <button
+                        key={lang.code}
+                        onClick={() => {
+                          setLanguage(lang.code);
+                          setIsLangMenuOpen(false);
+                        }}
+                        className={`w-full text-left px-4 py-2 text-sm transition-colors ${language === lang.code ? 'text-[#00f2ff] bg-[#00f2ff]/5 font-medium' : 'text-gray-600 dark:text-[#a0a0a0] hover:bg-gray-50 dark:hover:bg-white/5 hover:text-gray-900 dark:hover:text-white'}`}
+                      >
+                        {lang.label}
+                      </button>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              className="w-9 h-9 flex items-center justify-center rounded-full text-gray-600 dark:text-[#a0a0a0] hover:bg-gray-100 dark:hover:bg-white/10 hover:text-gray-900 dark:hover:text-white transition-all"
+              aria-label="Toggle Theme"
+            >
+              {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            </button>
+
+            {/* Github Link */}
+>>>>>>> @{-1}
             <motion.a
               href="https://github.com/Imposter-zx"
               target="_blank"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
+<<<<<<< HEAD
               transition={{ delay: 0.35 }}
               className="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center hover:border-[var(--red-accent)] hover:text-[var(--red-accent)] transition-all duration-300"
               aria-label="GitHub"
+=======
+              className="w-9 h-9 bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 flex items-center justify-center rounded-full text-gray-700 dark:text-white hover:border-[#00f2ff] dark:hover:border-[#00f2ff] transition-all hover:shadow-[0_0_10px_rgba(0,242,255,0.2)]"
+>>>>>>> @{-1}
             >
               <Github className="w-4 h-4" />
             </motion.a>
           </div>
         </div>
 
+<<<<<<< HEAD
         {/* Mobile Controls */}
         <div className="md:hidden flex items-center gap-4">
           <button onClick={toggleTheme} className="p-2" aria-label="Toggle theme">
@@ -98,6 +193,21 @@ const Navbar = ({ isDark, toggleTheme }) => {
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+=======
+        {/* Mobile Toggle */}
+        <div className="md:hidden flex items-center space-x-4">
+          <button
+            onClick={toggleTheme}
+            className="text-gray-600 dark:text-[#a0a0a0]"
+          >
+            {theme === 'dark' ? <Sun className="w-6 h-6" /> : <Moon className="w-6 h-6" />}
+          </button>
+          <button
+            className="text-gray-900 dark:text-white"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? <X /> : <Menu />}
+>>>>>>> @{-1}
           </button>
         </div>
       </div>
@@ -109,20 +219,31 @@ const Navbar = ({ isDark, toggleTheme }) => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
+<<<<<<< HEAD
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className="md:hidden bg-[rgba(10,10,10,0.98)] backdrop-blur-xl border-t border-white/5 overflow-hidden"
           >
             <div className="px-6 py-8 flex flex-col gap-6">
+=======
+            className="md:hidden bg-white/95 dark:bg-[#050505]/95 backdrop-blur-xl border-t border-gray-200 dark:border-white/5 overflow-hidden"
+          >
+            <div className="p-6 flex flex-col space-y-4">
+>>>>>>> @{-1}
               {navLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
+<<<<<<< HEAD
                   className="text-xl font-black uppercase tracking-tighter text-[var(--text-dim)] hover:text-[var(--text-main)] transition-colors"
+=======
+                  className="text-lg font-medium text-gray-700 dark:text-[#a0a0a0] hover:text-[#00f2ff] dark:hover:text-[#00f2ff]"
+>>>>>>> @{-1}
                 >
                   {link.name}
                 </a>
               ))}
+<<<<<<< HEAD
               <a
                 href="https://github.com/Imposter-zx"
                 target="_blank"
@@ -131,6 +252,30 @@ const Navbar = ({ isDark, toggleTheme }) => {
                 <Github className="w-4 h-4" />
                 <span className="text-[11px] uppercase tracking-widest font-bold">GitHub</span>
               </a>
+=======
+
+              <div className="pt-4 mt-4 border-t border-gray-200 dark:border-white/10">
+                <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3 font-bold">Language</p>
+                <div className="flex space-x-4">
+                  {[
+                    { code: 'en', label: 'ENG' },
+                    { code: 'fr', label: 'FRA' },
+                    { code: 'ar', label: 'عربي' }
+                  ].map((lang) => (
+                    <button
+                      key={lang.code}
+                      onClick={() => {
+                        setLanguage(lang.code);
+                        setIsMobileMenuOpen(false);
+                      }}
+                      className={`px-4 py-2 rounded-lg text-sm font-bold transition-colors ${language === lang.code ? 'bg-[#00f2ff]/10 text-[#00f2ff] border border-[#00f2ff]/30' : 'bg-gray-100 dark:bg-white/5 text-gray-600 dark:text-[#a0a0a0]'}`}
+                    >
+                      {lang.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+>>>>>>> @{-1}
             </div>
           </motion.div>
         )}

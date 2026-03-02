@@ -21,6 +21,7 @@ function App() {
   };
 
   return (
+<<<<<<< HEAD
     <div className={`relative min-h-screen transition-colors duration-500 ${isDark ? '' : 'light'}`}>
       <div className="text-[var(--text-main)] min-h-screen">
         <Navbar isDark={isDark} toggleTheme={toggleTheme} />
@@ -52,6 +53,21 @@ function App() {
           </div>
         </footer>
       </div>
+=======
+    <div className="relative min-h-screen bg-zinc-50 dark:bg-[#050505] text-gray-900 dark:text-[#e0e0e0] font-sans transition-colors duration-300">
+      <Background />
+      <Navbar />
+      <main className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <Hero />
+        <About />
+        <Skills />
+        <Projects />
+        <Contact />
+      </main>
+      <footer className="py-8 text-center text-sm text-gray-500 dark:text-[#a0a0a0]">
+        &copy; {new Date().getFullYear()} Ilyas Ait Oulhiane. Built with React & Framer Motion.
+      </footer>
+>>>>>>> @{-1}
     </div>
   );
 }

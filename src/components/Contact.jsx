@@ -29,7 +29,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <div className="text-xs uppercase tracking-widest text-gray-500 dark:text-[#666]">{t('contact.email')}</div>
-                  <div className="font-medium text-gray-900 dark:text-white">contact@ilyas.design</div>
+                  <div className="font-medium text-gray-900 dark:text-white">aitoulhyaneilyasse@gmail.com</div>
                 </div>
               </div>
             </div>

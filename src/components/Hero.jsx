@@ -15,9 +15,6 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <span className="px-4 py-1 flex w-fit rounded-full border border-blue-500/30 dark:border-[#00f2ff]/30 bg-blue-500/10 dark:bg-[#00f2ff]/5 text-blue-600 dark:text-[#00f2ff] text-xs font-mono mb-6 uppercase tracking-wider">
-            {t('hero.badge')}
-          </span>
           <h1 className="text-5xl md:text-8xl font-black mb-6 leading-tight text-gray-900 dark:text-white">
             {t('hero.title_1')} <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500 dark:from-[#00f2ff] dark:to-[#00f2ff] drop-shadow-[0_0_15px_rgba(0,242,255,0.3)]">{t('hero.title_2')}</span>{' '}

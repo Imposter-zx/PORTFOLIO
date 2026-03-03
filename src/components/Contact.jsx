@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Github, Linkedin, Send, MessageSquare } from 'lucide-react';
+import { Mail, Github, Linkedin, Send } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 const Contact = () => {
@@ -30,16 +30,6 @@ const Contact = () => {
                 <div>
                   <div className="text-xs uppercase tracking-widest text-gray-500 dark:text-[#666]">{t('contact.email')}</div>
                   <div className="font-medium text-gray-900 dark:text-white">contact@ilyas.design</div>
-                </div>
-              </div>
-
-              <div className="flex items-center space-x-4 p-4 bg-white/80 dark:bg-white/5 backdrop-blur-md rounded-2xl border border-gray-200 dark:border-white/10 shadow-sm dark:shadow-none">
-                <div className={`w-12 h-12 bg-purple-500/10 dark:bg-[#7000ff]/10 rounded-xl flex items-center justify-center text-purple-600 dark:text-[#7000ff] ${language === 'ar' ? 'ml-4' : ''}`}>
-                  <MessageSquare className="w-6 h-6" />
-                </div>
-                <div>
-                  <div className="text-xs uppercase tracking-widest text-gray-500 dark:text-[#666]">{t('contact.availability')}</div>
-                  <div className="font-medium text-emerald-600 dark:text-[#00ff9d]">{t('contact.status')}</div>
                 </div>
               </div>
             </div>

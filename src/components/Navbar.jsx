@@ -33,16 +33,15 @@ const Navbar = () => {
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="flex items-center space-x-2 cursor-pointer group"
+          className="flex flex-col cursor-pointer group"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
-          <div className="w-10 h-10 bg-blue-600 dark:bg-[#00f2ff] rounded-xl flex items-center justify-center text-white dark:text-black shadow-lg shadow-blue-500/20 dark:shadow-[#00f2ff]/20">
-            <Terminal className="w-6 h-6" />
-          </div>
-          <div className="hidden sm:block">
-            <span className="text-xl font-black tracking-tighter text-gray-900 dark:text-white uppercase transition-colors">Ilyas</span>
-            <span className="block text-[8px] font-bold uppercase tracking-[0.3em] text-gray-500 dark:text-[#a0a0a0]">Creative Dev</span>
-          </div>
+          <span className="text-2xl font-black tracking-[0.15em] text-gray-900 dark:text-white uppercase leading-none transition-all duration-300 group-hover:tracking-[0.18em]">
+            Ilyas
+          </span>
+          <span className="text-[9px] font-medium uppercase tracking-[0.35em] text-gray-500 dark:text-[#a0a0a0] leading-none mt-1.5 transition-all duration-300 group-hover:opacity-70">
+            Creative Developer
+          </span>
         </motion.div>
 
         {/* Desktop Nav */}

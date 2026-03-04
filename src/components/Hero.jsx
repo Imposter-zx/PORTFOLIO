@@ -54,7 +54,7 @@ const Hero = () => {
             <ChevronRight className={`w-4 h-4 transition-transform ${language === 'ar' ? 'mr-2 rotate-180 group-hover:-translate-x-1' : 'ml-2 group-hover:translate-x-1'}`} />
           </button>
           <button
-            onClick={() => window.open('/cv-site/cv.html', '_blank')}
+            onClick={() => window.open('./cv-site/cv.html', '_blank')}
             className="px-8 py-3 rounded-lg bg-white/50 border border-gray-200 text-gray-700 hover:bg-gray-100 dark:bg-white/5 dark:border-white/10 dark:text-white dark:hover:bg-white/10 font-semibold flex items-center backdrop-blur-md transition-all shadow-sm dark:shadow-none"
           >
             {t('hero.btn_cv')}

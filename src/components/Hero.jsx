@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Typewriter } from 'react-simple-typewriter';
-import { ChevronRight, Download, MousePointer2 } from 'lucide-react';
+import { ChevronRight, Eye, MousePointer2 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 const Hero = () => {
@@ -46,20 +46,19 @@ const Hero = () => {
           transition={{ delay: 0.6 }}
           className="flex flex-wrap gap-6"
         >
-          <a
-            href="#projects"
-            onClick={(e) => {
-              e.preventDefault();
-              document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
-            }}
+          <button
+            onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
             className="px-8 py-3 rounded-lg border-2 border-blue-500/50 text-blue-600 bg-blue-50 hover:bg-blue-100 dark:border-[#00f2ff] dark:text-[#00f2ff] dark:bg-transparent dark:hover:bg-[#00f2ff]/10 font-bold flex items-center group transition-all dark:shadow-[0_0_15px_rgba(0,242,255,0.2)]"
           >
             {t('hero.btn_projects')}
             <ChevronRight className={`w-4 h-4 transition-transform ${language === 'ar' ? 'mr-2 rotate-180 group-hover:-translate-x-1' : 'ml-2 group-hover:translate-x-1'}`} />
-          </a>
-          <button className="px-8 py-3 rounded-lg bg-white/50 border border-gray-200 text-gray-700 hover:bg-gray-100 dark:bg-white/5 dark:border-white/10 dark:text-white dark:hover:bg-white/10 font-semibold flex items-center backdrop-blur-md transition-all shadow-sm dark:shadow-none">
+          </button>
+          <button
+            onClick={() => window.open('/cv-site/cv.html', '_blank')}
+            className="px-8 py-3 rounded-lg bg-white/50 border border-gray-200 text-gray-700 hover:bg-gray-100 dark:bg-white/5 dark:border-white/10 dark:text-white dark:hover:bg-white/10 font-semibold flex items-center backdrop-blur-md transition-all shadow-sm dark:shadow-none"
+          >
             {t('hero.btn_cv')}
-            <Download className={`${language === 'ar' ? 'mr-2' : 'ml-2'} w-4 h-4`} />
+            <Eye className={`${language === 'ar' ? 'mr-2' : 'ml-2'} w-4 h-4`} />
           </button>
         </motion.div>
       </div>

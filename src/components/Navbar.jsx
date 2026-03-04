@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Github, Menu, X, Terminal, Moon, Sun, Globe } from 'lucide-react';
+import { Github, Menu, X, Moon, Sun, Globe } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 

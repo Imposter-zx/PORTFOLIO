@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# CV dev project (built output only in public/cv-site/ is tracked)
+public/cv/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

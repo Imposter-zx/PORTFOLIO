@@ -19,7 +19,7 @@ const translations = {
                 "Solving problems through code"
             ],
             btn_projects: "View My Projects",
-            btn_cv: "Download CV",
+            btn_cv: "See My CV",
             scroll: "Scroll to Explore"
         },
         about: {
@@ -105,7 +105,7 @@ const translations = {
                 "Résoudre des problèmes par le code"
             ],
             btn_projects: "Voir Mes Projets",
-            btn_cv: "Télécharger CV",
+            btn_cv: "Voir Mon CV",
             scroll: "Défiler pour Explorer"
         },
         about: {
@@ -191,7 +191,7 @@ const translations = {
                 "حل المشاكل من خلال البرمجة"
             ],
             btn_projects: "عرض مشاريعي",
-            btn_cv: "تحميل السيرة الذاتية",
+            btn_cv: "مشاهدة سيرتي الذاتية",
             scroll: "مرر للاستكشاف"
         },
         about: {

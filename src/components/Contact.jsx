@@ -51,13 +51,24 @@ const Contact = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="bg-white/80 dark:bg-white/5 backdrop-blur-md p-10 rounded-3xl border border-gray-200 dark:border-white/10 space-y-6 shadow-sm dark:shadow-none"
-            onSubmit={(e) => e.preventDefault()}
+            onSubmit={(e) => {
+              e.preventDefault();
+              const formData = new FormData(e.currentTarget);
+              const name = formData.get('name') || '';
+              const email = formData.get('email') || '';
+              const subject = formData.get('subject') || 'Contact from Portfolio';
+              const message = formData.get('message') || '';
+              const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0A${message}`;
+              window.location.href = `mailto:aitoulhyaneilyasse@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+            }}
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
                 <label className={`text-xs uppercase tracking-widest text-gray-500 dark:text-[#666] font-bold ${language === 'ar' ? 'mr-2' : 'ml-2'}`}>{t('contact.form.name_label')}</label>
                 <input
                   type="text"
+                  name="name"
+                  required
                   className="w-full bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-blue-400 dark:focus:border-[#00f2ff] transition-all shadow-sm"
                   placeholder={t('contact.form.name_placeholder')}
                 />
@@ -66,6 +77,8 @@ const Contact = () => {
                 <label className={`text-xs uppercase tracking-widest text-gray-500 dark:text-[#666] font-bold ${language === 'ar' ? 'mr-2' : 'ml-2'}`}>{t('contact.form.email_label')}</label>
                 <input
                   type="email"
+                  name="email"
+                  required
                   className="w-full bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-blue-400 dark:focus:border-[#00f2ff] transition-all shadow-sm"
                   placeholder={t('contact.form.email_placeholder')}
                 />
@@ -76,6 +89,8 @@ const Contact = () => {
               <label className={`text-xs uppercase tracking-widest text-gray-500 dark:text-[#666] font-bold ${language === 'ar' ? 'mr-2' : 'ml-2'}`}>{t('contact.form.subject_label')}</label>
               <input
                 type="text"
+                name="subject"
+                required
                 className="w-full bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-blue-400 dark:focus:border-[#00f2ff] transition-all shadow-sm"
                 placeholder={t('contact.form.subject_placeholder')}
               />
@@ -84,13 +99,15 @@ const Contact = () => {
             <div className="space-y-2">
               <label className={`text-xs uppercase tracking-widest text-gray-500 dark:text-[#666] font-bold ${language === 'ar' ? 'mr-2' : 'ml-2'}`}>{t('contact.form.msg_label')}</label>
               <textarea
+                name="message"
+                required
                 rows="5"
                 className="w-full bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-blue-400 dark:focus:border-[#00f2ff] transition-all resize-none shadow-sm"
                 placeholder={t('contact.form.msg_placeholder')}
               ></textarea>
             </div>
 
-            <button className={`w-full py-4 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 dark:from-[#00f2ff] dark:to-[#7000ff] text-white font-bold flex items-center justify-center group hover:shadow-[0_0_30px_rgba(0,100,255,0.3)] dark:hover:shadow-[0_0_30px_rgba(0,242,255,0.3)] transition-all ${language === 'ar' ? 'space-x-reverse space-x-2' : 'space-x-2'}`}>
+            <button type="submit" className={`w-full py-4 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 dark:from-[#00f2ff] dark:to-[#7000ff] text-white font-bold flex items-center justify-center group hover:shadow-[0_0_30px_rgba(0,100,255,0.3)] dark:hover:shadow-[0_0_30px_rgba(0,242,255,0.3)] transition-all ${language === 'ar' ? 'space-x-reverse space-x-2' : 'space-x-2'}`}>
               <span>{t('contact.form.btn_send')}</span>
               <Send className={`w-4 h-4 transition-transform ${language === 'ar' ? 'rotate-180 group-hover:-translate-x-1 group-hover:-translate-y-1' : 'group-hover:translate-x-1 group-hover:-translate-y-1'}`} />
             </button>

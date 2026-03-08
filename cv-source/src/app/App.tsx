@@ -24,8 +24,8 @@ export default function App() {
 
             {/* Contact Info */}
             <div className="flex flex-col md:flex-row gap-2 md:gap-8 text-[13px] text-gray-600">
-              <a href="mailto:aitouihyaneilyas@gmail.com" className="hover:text-blue-600 transition-colors">
-                aitouihyaneilyas@gmail.com
+              <a href="mailto:aitoulhyaneilyasse@gmail.com" className="hover:text-blue-600 transition-colors">
+                aitoulhyaneilyasse@gmail.com
               </a>
               <a href="https://ilyasportfolio.vercel.app" className="hover:text-blue-600 transition-colors">
                 ilyasportfolio.vercel.app
@@ -39,7 +39,7 @@ export default function App() {
               About
             </h2>
             <p className="text-[15px] leading-[1.75] text-gray-700 max-w-full md:max-w-[85%]">
-              Computer Science student at IFIAC specializing in bridging the gap between logical
+              Computer Science student at IFIAG specializing in bridging the gap between logical
               backend structures and visually stunning frontend experiences. Self-taught mindset
               with an obsession for creative problem-solving. Whether crafting 3D assets in Blender
               or optimizing a React application, I aim for excellence in every pixel.
@@ -180,7 +180,7 @@ export default function App() {
                   Computer Science
                 </h3>
                 <p className="text-[12px] text-gray-600 mt-1">
-                  IFIAC · Current Student
+                  IFIAG · Current Student
                 </p>
                 <p className="text-[12px] text-gray-500 mt-2">
                   Focus: Full-stack development & creative motion design
